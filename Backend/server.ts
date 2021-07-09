@@ -1,8 +1,8 @@
 import express from 'express';
-const PORT = 3000;
 
 let tryp = 'tr';
 
+const PORT = process.env.PORT || 3000;
 const app: express.Application = express();
 
 app.get('/', (req, res) => {
