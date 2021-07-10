@@ -15,13 +15,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "outDir": "./build"
-  },
-  "baseUrl": "./src",
-  "paths": {
-    "@components": "/components",
-    "@styles": "./styles",
-    "@config": "./config"
+    "outDir": "./build",
+    "baseUrl": "./src",
+    "paths": {
+      "@components": ["components"],
+      "@styles": ["styles"],
+      "@config": ["config"]
+    }
   },
   "include": ["src"]
 }
