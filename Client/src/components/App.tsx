@@ -1,6 +1,6 @@
 import { promises } from 'fs';
 import React, { useState, useEffect } from 'react';
-import { GlobalStyles } from '@styles';
+import { GlobalStyles } from '../styles';
 
 // here would be pages within a router, initial fetch calls, state management and context api useage.
 
@@ -16,7 +16,9 @@ function App() {
 
   return (
     <div className='App'>
-      <div>this is app</div>
+      <GlobalStyles>
+        <div>this is app</div>
+      </GlobalStyles>
     </div>
   );
 }
