@@ -6,6 +6,7 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
+import { User } from '../components/interfaces/userInterfaces';
 const authContext = createContext();
 
 export const ProvideAuth = ({ children }: { children: ReactNode }) => {
@@ -18,10 +19,10 @@ export const useAuth = () => {
 };
 
 function useProvideAuth() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
-  const signin = (email, password) => {
+  const signin = (email: string, password: string) => {
     // return firebase
     //   .auth()
     //   .signInWithEmailAndPassword(email, password)
@@ -32,7 +33,7 @@ function useProvideAuth() {
     // todo fetch user using email and password, returns userAuth object from server with jwt signature.
   };
 
-  const signup = (email, password) => {
+  const signup = (email: string, password: string) => {
     // return firebase
     //   .auth()
     //   .createUserWithEmailAndPassword(email, password)
@@ -85,9 +86,9 @@ function useProvideAuth() {
     if (user) {
       setUser(user);
     } else {
-      setUser(false);
+      setUser(null);
     }
-  }, []);
+  }, [user]);
 
   return {
     user,

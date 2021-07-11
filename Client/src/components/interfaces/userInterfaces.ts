@@ -19,4 +19,13 @@ interface UserData {
   posts: JournalEntrie[];
 }
 
-export type { JournalEntrie, UserData };
+interface User {
+  _id: number;
+  name: string;
+  email: string;
+  token: string;
+}
+
+type Stateuser = User | false;
+
+export type { JournalEntrie, UserData, User, Stateuser };
