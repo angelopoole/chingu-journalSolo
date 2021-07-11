@@ -6,8 +6,9 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
+import { Auth } from '../components/interfaces/AuthInterface';
 import { User } from '../components/interfaces/userInterfaces';
-const authContext = createContext();
+const authContext = createContext<Auth | undefined>(undefined);
 
 export const ProvideAuth = ({ children }: { children: ReactNode }) => {
   const auth = useProvideAuth();

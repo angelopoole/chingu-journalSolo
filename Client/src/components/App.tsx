@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GlobalStyles } from '../styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ProvideAuth } from '../hooks/use-auth';
 
 import Layout from './Layout';
 import HomePage from '../pages/Homepage';
@@ -41,12 +42,14 @@ function App() {
 
   return (
     <div className='App'>
-      <Router>
-        <GlobalStyles />
-        <Layout loggedIn={userData?.user ? true : false}>
-          <Route path='/' component={HomePage} exact />
-        </Layout>
-      </Router>
+      <ProvideAuth>
+        <Router>
+          <GlobalStyles />
+          <Layout loggedIn={userData?.user ? true : false}>
+            <Route path='/' component={HomePage} exact />
+          </Layout>
+        </Router>
+      </ProvideAuth>
     </div>
   );
 }
