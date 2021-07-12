@@ -1,19 +1,41 @@
 import Express, { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import User from '../Models/userModel';
+import { generateToken } from '../util/generateJWT';
 // !template
 //  @desc
 //  @route
 //  @access
 
+// @desc    Auth user & get token
+// @route   POST /api/users/login
+// @access  Public
+const authUser = asyncHandler(async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    console.log('authenticated');
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error('Invalid email or password');
+  }
+});
+
 //  @desc create new user in db
 //  @route POST /api/users/
 //  @access public
 const registerUser = asyncHandler(async (req: Request, res: Response) => {
-  console.log(req);
   const { name, email, password } = req.body;
 
-  const userExists = User.findOne({ email });
+  const userExists = await User.findOne({ email });
 
   if (userExists) {
     res.status(400);
@@ -27,8 +49,7 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
-      // token: generateToken(user._id),
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -47,4 +68,4 @@ const getTest = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { registerUser, getTest };
+export { registerUser, getTest, authUser };

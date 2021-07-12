@@ -20,7 +20,8 @@ connectDb();
 const PORT = process.env.PORT || 3000;
 const app: express.Application = express();
 
-app.use(express.bodyParser());
+//https://stackoverflow.com/a/47232318/12634008 bodyparser -> json
+app.use(express.json());
 
 //use morgan logging if env=development
 if (process.env.NODE_ENV === 'development') {
