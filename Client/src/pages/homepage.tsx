@@ -1,9 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAuth } from '../hooks/use-auth';
 
 const StyledContainer = styled.div`
-  min-height: 80vh;
+  min-height: 90vh;
   background-color: aliceblue;
+  width: 100%;
+
+  .login-message {
+    text-align: center;
+    margin: auto;
+    padding: 20%;
+    background-color: blanchedalmond;
+    height: 100vh;
+  }
 `;
 
 /*
@@ -17,9 +27,17 @@ this will require a form and a state to hold form. aswell as the mapping of jour
 */
 
 const HomePage = () => {
+  const auth = useAuth();
+
+  console.log(auth?.user);
+
   return (
     <StyledContainer>
-      <div>here is the home page</div>
+      {auth?.user ? (
+        <div>here is the home page</div>
+      ) : (
+        <div className='login-message'> please login! </div>
+      )}
     </StyledContainer>
   );
 };

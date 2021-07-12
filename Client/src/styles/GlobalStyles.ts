@@ -25,6 +25,7 @@ body{
 
 main {
   margin: 0 auto;
+    height: 100%;
     width: 100%;
 }
 

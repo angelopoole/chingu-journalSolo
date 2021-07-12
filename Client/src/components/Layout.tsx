@@ -2,18 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import NavBar from './NavBar';
 
-const Layout = ({
-  children,
-  loggedIn,
-}: {
-  children: React.ReactNode;
-  loggedIn: boolean;
-}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <NavBar loggedIn={loggedIn} />
+    <>
+      <NavBar />
       <main>{children}</main>
-    </div>
+    </>
   );
 };
 

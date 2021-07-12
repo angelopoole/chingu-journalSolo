@@ -6,8 +6,8 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
-import { Auth } from '../components/interfaces/AuthInterface';
-import { User } from '../components/interfaces/userInterfaces';
+import { Auth } from '../interfaces/AuthInterface';
+import { User } from '../interfaces/userInterfaces';
 const authContext = createContext<Auth | undefined>(undefined);
 
 export const ProvideAuth = ({ children }: { children: ReactNode }) => {
@@ -24,6 +24,7 @@ function useProvideAuth() {
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
   const signin = (email: string, password: string) => {
+    console.log('hit here');
     // return firebase
     //   .auth()
     //   .signInWithEmailAndPassword(email, password)
