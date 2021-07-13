@@ -1,13 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import NoteCard from '../NoteCard';
+import { Note } from '../../interfaces/NoteTypes';
 
-type Note = {
-  _id: number;
-  title: string;
-  body: string;
-  user: string;
-};
 type Props = {
   notes: Note[];
 };
@@ -22,7 +17,7 @@ const NoteShocase = (props: Props) => {
   const notesArr = props.notes;
   console.log(notesArr);
   let mappedNotes = notesArr.map(note => {
-    return <NoteCard note={note} />;
+    return <NoteCard key={note._id} note={note} />;
   });
 
   return <StyledNoteSection>{mappedNotes}</StyledNoteSection>;

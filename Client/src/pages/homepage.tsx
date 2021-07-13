@@ -7,6 +7,8 @@ import { useAuth } from '../hooks/use-auth';
 import NotesForm from '../components/sections/NotesForm';
 import NoteShocase from '../components/sections/NoteShocase';
 
+import { Note } from '../interfaces/NoteTypes';
+
 const StyledContainer = styled.div`
   min-height: 90vh;
   background-color: #4d94db;
@@ -32,7 +34,7 @@ this will require a form and a state to hold form. aswell as the mapping of jour
 */
 
 const HomePage = () => {
-  const [userNotes, setUserNotes] = useState([]);
+  const [userNotes, setUserNotes] = useState<Note[]>([]);
   const auth = useAuth();
   console.log(userNotes);
   const fetchPosts = async (userToken: string) => {
@@ -54,9 +56,13 @@ const HomePage = () => {
     return <div className='login-message'> please login! </div>;
   }
 
+  const updateNotesArray = (newNote: Note) => {
+    setUserNotes([...userNotes, newNote]);
+  };
+
   return (
     <StyledContainer>
-      <NotesForm />
+      <NotesForm updateNotesArray={updateNotesArray} />
       <NoteShocase notes={userNotes} />
     </StyledContainer>
   );

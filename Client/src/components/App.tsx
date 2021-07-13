@@ -8,7 +8,15 @@ import HomePage from '../pages/Homepage';
 import AuthPage from '../pages/AuthPage';
 import Loader from './Loader';
 
+// console.log(useAuth);
+
 function App() {
+  const auth = useAuth();
+
+  if (auth?.user) {
+    console.log(auth?.user);
+  }
+
   const fetchUserData = async () => {
     return console.log('lol');
   };

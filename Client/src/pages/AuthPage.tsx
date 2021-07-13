@@ -17,9 +17,9 @@ interface FormTypeParam {
 
 const AuthPage = (props: RouteComponentProps) => {
   const auth = useAuth();
-  console.log(auth?.user);
-  console.log(auth?.loading);
-  console.log(auth?.error);
+  // console.log(auth?.user);
+  // console.log(auth?.loading);
+  // console.log(auth?.error);
   const { formTypeParam }: { formTypeParam: string } = useParams();
 
   // const [formType, setFormType] = useState<FormTypeParam>(formTypeParam);
