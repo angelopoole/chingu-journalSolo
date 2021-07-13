@@ -1,9 +1,9 @@
-interface Note {
-  _id: string;
-  author: string;
-  title: string;
-  body: string;
-}
+// interface Note {
+//   _id: string;
+//   user: string;
+//   title: string;
+//   body: string;
+// }
 
 interface User {
   _id: number;
@@ -14,7 +14,7 @@ interface User {
 
 type Stateuser = User | false;
 
-export type { Note, User, Stateuser };
+export type { User, Stateuser };
 
 // tags: string[];
 // dueDate: null | number;

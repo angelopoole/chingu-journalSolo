@@ -1,11 +1,31 @@
 import React from 'react';
+import styled from 'styled-components';
+import NoteCard from '../NoteCard';
 
-const noteShocase = () => {
-  return (
-    <div>
-      <div>notes go here</div>
-    </div>
-  );
+type Note = {
+  _id: number;
+  title: string;
+  body: string;
+  user: string;
+};
+type Props = {
+  notes: Note[];
 };
 
-export default noteShocase;
+const StyledNoteSection = styled.section`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+`;
+
+const NoteShocase = (props: Props) => {
+  const notesArr = props.notes;
+  console.log(notesArr);
+  let mappedNotes = notesArr.map(note => {
+    return <NoteCard note={note} />;
+  });
+
+  return <StyledNoteSection>{mappedNotes}</StyledNoteSection>;
+};
+
+export default NoteShocase;

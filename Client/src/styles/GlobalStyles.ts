@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
+
   html {
   box-sizing: border-box;
   width: 100%;
@@ -15,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body{
+  /* color: #ECECEC; */
   margin: 0;
   width: 100%;
   min-height: 100%;

@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { useAuth } from '../hooks/use-auth';
-import NotesForm from '../components/sections/NotesForm';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+import { useAuth } from '../hooks/use-auth';
+
+import NotesForm from '../components/sections/NotesForm';
+import NoteShocase from '../components/sections/NoteShocase';
 
 const StyledContainer = styled.div`
   min-height: 90vh;
-  background-color: aliceblue;
+  background-color: #4d94db;
   width: 100%;
 
   .login-message {
@@ -28,16 +31,22 @@ this will require a form and a state to hold form. aswell as the mapping of jour
   should show signin / login page in case they arent signed in. this will be done with token auth
 */
 
-const fetchPosts = async () => {
-  // await axios.get()
-};
-
 const HomePage = () => {
+  const [userNotes, setUserNotes] = useState([]);
   const auth = useAuth();
-
+  console.log(userNotes);
+  const fetchPosts = async (userToken: string) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    const { data }: { data: [] } = await axios.get('/api/notes', config);
+    return setUserNotes(data);
+  };
   useEffect(() => {
     if (auth?.user) {
-      fetchPosts();
+      fetchPosts(auth.user.token);
     }
   }, [auth?.user]);
 
@@ -48,6 +57,7 @@ const HomePage = () => {
   return (
     <StyledContainer>
       <NotesForm />
+      <NoteShocase notes={userNotes} />
     </StyledContainer>
   );
 };
