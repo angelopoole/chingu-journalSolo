@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
+import AuthPage from '../pages/AuthPage';
 
 const StyledNavContainer = styled.div`
   width: 100%;
@@ -62,6 +63,7 @@ const StyledUl = styled.ul`
   margin: 0px 0.5rem 0px 0.5rem;
 `;
 const NavBar = () => {
+  const auth = useAuth();
   return (
     <StyledNavContainer>
       <StyledNavBar>
@@ -73,8 +75,14 @@ const NavBar = () => {
         </div>
         <div className='login-logout-cluster'>
           <StyledUl>
-            <StyledLink to='/auth/:login'>login</StyledLink>
-            <StyledLink to='/auth/:register'>regsiter</StyledLink>
+            {auth?.user ? (
+              <button onClick={() => auth.signout()}>sign out</button>
+            ) : (
+              <>
+                <StyledLink to='/auth/login'>login</StyledLink>
+                <StyledLink to='/auth/signup'>signup</StyledLink>
+              </>
+            )}
           </StyledUl>
         </div>
       </StyledNavBar>

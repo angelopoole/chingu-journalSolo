@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { GlobalStyles } from '../styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ProvideAuth } from '../hooks/use-auth';
+import { ProvideAuth, useAuth } from '../hooks/use-auth';
 
 import Layout from './Layout';
 import HomePage from '../pages/Homepage';
 import AuthPage from '../pages/AuthPage';
-
-// import { fetchUsers, fetchJournalEntries } from '../config/data';
-// import { JournalEntrie, UserData } from '../interfaces/userInterfaces';
-// here would be pages within a router, initial fetch calls, state management and context api useage.
-
-// const simulatedApiCall: Promise;
+import Loader from './Loader';
 
 function App() {
   const fetchUserData = async () => {
@@ -37,7 +32,8 @@ function App() {
           <Layout>
             <Switch>
               <Route path='/' component={HomePage} exact />
-              <Route path='/auth' component={AuthPage} />
+              <Route path='/auth/:formTypeParam' component={AuthPage} exact />
+              <Route path='/loaderTest' component={Loader} />
             </Switch>
           </Layout>
         </Router>

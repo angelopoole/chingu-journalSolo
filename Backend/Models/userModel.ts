@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import { User } from '../interfaces/UserInterface';
+import { UserInterface } from '../interfaces/UserInterface';
 
-const userSchema = new mongoose.Schema<User>({
+const userSchema = new mongoose.Schema<UserInterface>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },

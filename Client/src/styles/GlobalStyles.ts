@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
   html {
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
 }
 *,*:before, *:after {
   box-sizing: inherit;
@@ -24,6 +25,7 @@ body{
 }
 
 main {
+  min-height: 100%;
   margin: 0 auto;
     height: 100%;
     width: 100%;

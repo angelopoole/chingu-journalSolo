@@ -34,6 +34,7 @@ const authUser = asyncHandler(async (req: Request, res: Response) => {
 //  @access public
 const registerUser = asyncHandler(async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
+  console.log('received');
 
   const userExists = await User.findOne({ email });
 

@@ -1,7 +1,7 @@
-interface User {
+interface UserInterface {
   name: { type: String };
   email: { type: String };
   password: { type: String };
 }
 
-export type { User };
+export type { UserInterface };

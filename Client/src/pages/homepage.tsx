@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../hooks/use-auth';
+import NotesForm from '../components/sections/NotesForm';
+import axios from 'axios';
 
 const StyledContainer = styled.div`
   min-height: 90vh;
@@ -26,18 +28,26 @@ this will require a form and a state to hold form. aswell as the mapping of jour
   should show signin / login page in case they arent signed in. this will be done with token auth
 */
 
+const fetchPosts = async () => {
+  // await axios.get()
+};
+
 const HomePage = () => {
   const auth = useAuth();
 
-  console.log(auth?.user);
+  useEffect(() => {
+    if (auth?.user) {
+      fetchPosts();
+    }
+  }, [auth?.user]);
+
+  if (!auth?.user) {
+    return <div className='login-message'> please login! </div>;
+  }
 
   return (
     <StyledContainer>
-      {auth?.user ? (
-        <div>here is the home page</div>
-      ) : (
-        <div className='login-message'> please login! </div>
-      )}
+      <NotesForm />
     </StyledContainer>
   );
 };

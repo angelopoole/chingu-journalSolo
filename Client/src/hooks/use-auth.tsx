@@ -6,6 +6,7 @@ import React, {
   createContext,
   ReactNode,
 } from 'react';
+import axios from 'axios';
 import { Auth } from '../interfaces/AuthInterface';
 import { User } from '../interfaces/userInterfaces';
 const authContext = createContext<Auth | undefined>(undefined);
@@ -21,21 +22,60 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
-  const signin = (email: string, password: string) => {
-    console.log('hit here');
-    // return firebase
-    //   .auth()
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then((response) => {
-    //     setUser(response.user);
-    //     return response.user;
-    //   });
+
+  const signin = async (email: string, password: string) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const { data } = await axios.post(
+        `/api/users/login`,
+        { email, password },
+        config
+      );
+      console.log(data);
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+
     // todo fetch user using email and password, returns userAuth object from server with jwt signature.
   };
 
-  const signup = (email: string, password: string) => {
+  const signup = async (name: string, email: string, password: string) => {
+    setLoading(true);
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      let { data }: { data: User } = await axios.post(
+        `/api/users`,
+        { name, email, password },
+        config
+      );
+      setUser(data);
+      setLoading(false);
+      return user;
+    } catch (err) {
+      console.log('ERR', err.response);
+      const errResponse =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+
+      setError(errResponse);
+      setLoading(false);
+      return { error, loading };
+    }
+
     // return firebase
     //   .auth()
     //   .createUserWithEmailAndPassword(email, password)
@@ -48,6 +88,7 @@ function useProvideAuth() {
   };
 
   const signout = () => {
+    setUser(null);
     // return firebase
     //   .auth()
     //   .signOut()
@@ -75,28 +116,22 @@ function useProvideAuth() {
   //     });
   // };
 
+  const clearError = () => {
+    return setError(null);
+  };
+
   useEffect(() => {
-    // const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-    // if (user) {
-    // setUser(user);
-    // } else {
-    // setUser(false);
-    // }
-    // });
-    // Cleanup subscription on unmount
-    // return () => unsubscribe();
-    if (user) {
-      setUser(user);
-    } else {
-      setUser(null);
-    }
-  }, [user]);
+    console.log('useAuth useEffect');
+  }, [user, error, loading]);
 
   return {
     user,
+    loading,
+    error,
     signin,
     signup,
     signout,
+    clearError,
     // sendPasswordResetEmail,
     // confirmPasswordReset,
   };

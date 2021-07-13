@@ -58,8 +58,7 @@ app.get('/file/read', async (req, res) => {
       console.log(`good to go:`.bold + `${data}`.green.underline);
     }
   );
-});
-
+}); //
 app.use(errorHandler);
 app.use(notFound);
 
