@@ -5,13 +5,14 @@ import { useAuth } from '../hooks/use-auth';
 import AuthPage from '../pages/AuthPage';
 
 const StyledNavContainer = styled.div`
+  /* display: flex; */
   width: 100%;
   background-color: purple;
 `;
 
 const sharedStyles = css`
   list-style: none;
-  padding: 1.9rem;
+  padding: 1.2rem;
   background-color: orange;
   cursor: pointer;
   :hover {
@@ -34,7 +35,7 @@ const StyledNavBar = styled.nav`
 
   li {
     list-style: none;
-    padding: 1.9rem;
+    padding: 1.2rem;
     background-color: orange;
     cursor: pointer;
     :hover {

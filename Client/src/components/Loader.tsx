@@ -7,13 +7,15 @@ const StyledLoader = styled.div`
   display: grid;
   min-height: 100%;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 90vh);
+  /* height: 40rem; */
 
   li {
-    height: 15rem;
-    text-align: center;
-    align-self: center;
-    text-align: center;
+    display: flex;
+    /* height: auto; */
+    flex: 1;
+    justify-content: center;
+    align-items: center;
     list-style: none;
 
     &:hover {

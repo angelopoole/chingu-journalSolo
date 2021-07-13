@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import userRoutes from './routes/userRoutes';
+import noteRoutes from './routes/noteRoutes';
 
 import { errorHandler, notFound } from './middleware/errorMiddleware';
 import { connectDb } from './config/db';
@@ -31,6 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // routes
 app.use('/api/users', userRoutes);
+app.use('/api/notes', noteRoutes);
 
 app.get('/fileStats', (req, res) => {
   try {
