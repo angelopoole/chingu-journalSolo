@@ -9,6 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <NavBar />
       <main>{children}</main>
+      <footer>this be a footer</footer>
     </>
   );
 };

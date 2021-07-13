@@ -13,10 +13,6 @@ import Loader from './Loader';
 function App() {
   const auth = useAuth();
 
-  if (auth?.user) {
-    console.log(auth?.user);
-  }
-
   const fetchUserData = async () => {
     return console.log('lol');
   };

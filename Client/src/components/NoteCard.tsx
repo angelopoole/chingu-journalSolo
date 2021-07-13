@@ -18,20 +18,22 @@ const StyledContent = styled.div`
     border-top-right-radius: 2.3rem;
     text-align: center;
   }
-  .body {
-  }
-  .button-container {
-    display: flex;
-    justify-content: space-around;
-    align-self: flex-end;
-    button {
-      all: unset;
-      background-color: coral;
-      padding: 0.3rem;
-      min-width: 38.203px;
-      text-align: center;
-      border-radius: 2rem;
-    }
+`;
+
+const StyledButtonContainer = styled.div`
+  justify-self: flex-end;
+
+  display: flex;
+  justify-content: space-around;
+  align-content: flex-end;
+  /* align-self: flex-end; */
+  button {
+    all: unset;
+    background-color: coral;
+    padding: 0.3rem;
+    min-width: 38.203px;
+    text-align: center;
+    border-radius: 2rem;
   }
 `;
 
@@ -45,11 +47,11 @@ const NoteCard = ({ note }: { note: Note }) => {
       <StyledContent>
         <h3 className='title'>{title}</h3>
         <p className='body'>{body}</p>
-        <div className='button-container'>
-          <button>edit</button>
-          <button>delete</button>
-        </div>
       </StyledContent>
+      <StyledButtonContainer className='button-container'>
+        <button>edit</button>
+        <button>delete</button>
+      </StyledButtonContainer>
     </StyledOuterCard>
   );
 };

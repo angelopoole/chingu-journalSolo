@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useAuth } from '../hooks/use-auth';
 
 import NotesForm from '../components/sections/NotesForm';
-import NoteShocase from '../components/sections/NoteShocase';
+import NoteShowcase from '../components/sections/NoteShowcase';
 
 import { Note } from '../interfaces/NoteTypes';
 
@@ -34,9 +34,11 @@ this will require a form and a state to hold form. aswell as the mapping of jour
 */
 
 const HomePage = () => {
-  const [userNotes, setUserNotes] = useState<Note[]>([]);
   const auth = useAuth();
+
+  const [userNotes, setUserNotes] = useState<Note[]>([]);
   console.log(userNotes);
+
   const fetchPosts = async (userToken: string) => {
     const config = {
       headers: {
@@ -47,8 +49,14 @@ const HomePage = () => {
     return setUserNotes(data);
   };
   useEffect(() => {
+    if (localStorage.token) {
+      console.log('token found');
+    }
     if (auth?.user) {
       fetchPosts(auth.user.token);
+    }
+    if (!auth?.user) {
+      setUserNotes([]);
     }
   }, [auth?.user]);
 
@@ -63,7 +71,7 @@ const HomePage = () => {
   return (
     <StyledContainer>
       <NotesForm updateNotesArray={updateNotesArray} />
-      <NoteShocase notes={userNotes} />
+      <NoteShowcase notes={userNotes} />
     </StyledContainer>
   );
 };

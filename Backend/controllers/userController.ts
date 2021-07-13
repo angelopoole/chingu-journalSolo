@@ -2,6 +2,7 @@ import Express, { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import User from '../Models/userModel';
 import { generateToken } from '../util/generateJWT';
+import { RequestWithUser } from '../interfaces/authInterface';
 // !template
 //  @desc
 //  @route
@@ -28,6 +29,20 @@ const authUser = asyncHandler(async (req: Request, res: Response) => {
     throw new Error('Invalid email or password');
   }
 });
+
+//  @desc gets user by token
+//  @route GET /api/users/token
+//  @access private
+const authUserWithToken = asyncHandler(
+  async (req: RequestWithUser, res: Response) => {
+    if (!req?.user?._id) {
+      res.status(401);
+      throw new Error('No user info');
+    }
+
+    res.status(201).json(req.user);
+  }
+);
 
 //  @desc create new user in db
 //  @route POST /api/users/
@@ -69,4 +84,4 @@ const getTest = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { registerUser, getTest, authUser };
+export { registerUser, getTest, authUser, authUserWithToken };

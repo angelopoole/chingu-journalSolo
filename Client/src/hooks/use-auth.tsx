@@ -27,10 +27,22 @@ function useProvideAuth() {
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
 
-  // const checkForToken = async () =>{
+  const persistState = async (token: string) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-  // }
+    const data: User = await axios.get('/api/users/login/token', config);
+    console.log('userHereToken', data);
+    setUser({ ...data, token });
+  };
+  if (localStorage.token && !user) {
+    persistState(localStorage.token);
+  }
 
+  // @desc fetches user from backend using email + string.
   const signin = async (email: string, password: string) => {
     try {
       const config = {
@@ -43,13 +55,11 @@ function useProvideAuth() {
         { email, password },
         config
       );
-      console.log(data);
+      localStorage.setItem('token', data.token);
       setUser(data);
     } catch (error) {
       console.log(error);
     }
-
-    // todo fetch user using email and password, returns userAuth object from server with jwt signature.
   };
 
   const signup = async (name: string, email: string, password: string) => {
@@ -79,27 +89,13 @@ function useProvideAuth() {
       setLoading(false);
       return { error, loading };
     }
-
-    // return firebase
-    //   .auth()
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((response) => {
-    //     setUser(response.user);
-    //     return response.user;
-    //   });
     // todo send email/password, create user, return newUser with jwt token
     // ! endpoint: POST api/users/
   };
 
   const signout = () => {
     setUser(null);
-    // return firebase
-    //   .auth()
-    //   .signOut()
-    //   .then(() => {
-    //     setUser(false);
-    //   });
-    // todo clear jwtToken, clear user object from state, clear user object from cache or localstorage
+    localStorage.clear();
   };
 
   // ! not part of mvp, implement later.

@@ -13,7 +13,7 @@ const StyledNoteSection = styled.section`
   grid-template-rows: repeat(3, 1fr);
 `;
 
-const NoteShocase = (props: Props) => {
+const NoteShowcase = (props: Props) => {
   const notesArr = props.notes;
   console.log(notesArr);
   let mappedNotes = notesArr.map(note => {
@@ -23,4 +23,4 @@ const NoteShocase = (props: Props) => {
   return <StyledNoteSection>{mappedNotes}</StyledNoteSection>;
 };
 
-export default NoteShocase;
+export default NoteShowcase;
