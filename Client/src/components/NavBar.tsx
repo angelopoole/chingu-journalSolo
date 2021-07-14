@@ -5,27 +5,12 @@ import { useAuth } from '../hooks/use-auth';
 import AuthPage from '../pages/AuthPage';
 
 const StyledNavContainer = styled.div`
-  /* display: flex; */
   width: 100%;
-  background-color: purple;
+  background-color: var(--main-brand-color);
+  border: 0;
 `;
 
-const sharedStyles = css`
-  list-style: none;
-  padding: 1.2rem;
-  background-color: orange;
-  cursor: pointer;
-  :hover {
-    background-color: red;
-    transition: var(--transition);
-    &:nth-child(2) {
-      background-color: blue;
-    }
-  }
-`;
 const StyledLink = styled(Link)`
-  ${sharedStyles}
-
   text-decoration: none;
   color: inherit;
 `;
@@ -33,18 +18,30 @@ const StyledLink = styled(Link)`
 const StyledNavBar = styled.nav`
   display: flex;
 
+  .sign-out {
+    all: unset;
+  }
+
+  .nav-button {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgb(0 0 0 / 0%);
+    transition-duration: 0.3s;
+    transition-property: transform;
+    transform-origin: 0 100%;
+
+    cursor: pointer;
+    padding: 1.2rem;
+    :hover {
+      background-color: var(--dark-accent);
+      transition: var(--transition);
+      transform: skew(-10deg);
+    }
+  }
+
   li {
     list-style: none;
-    padding: 1.2rem;
-    background-color: orange;
-    cursor: pointer;
-    :hover {
-      background-color: red;
-      transition: var(--transition);
-      &:nth-child(2) {
-        background-color: blue;
-      }
-    }
   }
 
   .login-logout-cluster {
@@ -65,23 +62,35 @@ const StyledUl = styled.ul`
 `;
 const NavBar = () => {
   const auth = useAuth();
+
   return (
     <StyledNavContainer>
       <StyledNavBar>
         <div className='interaction-buttons'>
           <StyledUl>
-            <StyledLink to='/'>Journal</StyledLink>
-            <li>Create a note</li>
+            <StyledLink className='nav-button' to='/'>
+              Journal
+            </StyledLink>
+            <li className='nav-button'>Create a note</li>
           </StyledUl>
         </div>
         <div className='login-logout-cluster'>
           <StyledUl>
             {auth?.user ? (
-              <button onClick={() => auth.signout()}>sign out</button>
+              <button
+                className='nav-button sign-out'
+                onClick={() => auth.signout()}
+              >
+                sign out
+              </button>
             ) : (
               <>
-                <StyledLink to='/auth/login'>login</StyledLink>
-                <StyledLink to='/auth/signup'>signup</StyledLink>
+                <StyledLink className='nav-button' to='/auth/login'>
+                  login
+                </StyledLink>
+                <StyledLink className='nav-button' to='/auth/signup'>
+                  signup
+                </StyledLink>
               </>
             )}
           </StyledUl>

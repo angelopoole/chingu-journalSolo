@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { RouteComponentProps, useParams, Redirect } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import Loader from '../components/Loader';
@@ -11,27 +11,18 @@ interface FormInput {
   name: string;
 }
 
-interface FormTypeParam {
-  formTypeParam: string;
-}
-
 const AuthPage = (props: RouteComponentProps) => {
-  const auth = useAuth();
-  // console.log(auth?.user);
-  // console.log(auth?.loading);
-  // console.log(auth?.error);
   const { formTypeParam }: { formTypeParam: string } = useParams();
+  const auth = useAuth();
+  // auth has .user, .loading, .error
 
-  // const [formType, setFormType] = useState<FormTypeParam>(formTypeParam);
-  // setFormType(formTypeParam);
-
-  console.log(formTypeParam);
   const [formInput, SetFormInput] = useState<FormInput>({
     name: '',
     email: '',
     password: '',
   });
 
+  // handle formOnchange, sets formInput
   const handleFormChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const target = e.target;
     const value = target.value;
@@ -40,6 +31,7 @@ const AuthPage = (props: RouteComponentProps) => {
     SetFormInput({ ...formInput, [name]: value });
   };
 
+  // ? handle form submit, fires off signup/signin based off formType this is weird
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (formTypeParam === 'login') {

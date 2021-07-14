@@ -9,9 +9,11 @@ import NoteShowcase from '../components/sections/NoteShowcase';
 
 import { Note } from '../interfaces/NoteTypes';
 
+// @desc this pace is protected, will only show notes if user is logged in.
+
 const StyledContainer = styled.div`
   min-height: 90vh;
-  background-color: #4d94db;
+  background-color: var(--dark-shades);
   width: 100%;
 
   .login-message {

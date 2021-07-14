@@ -7,6 +7,7 @@ const StyledOuterCard = styled.div`
   flex-flow: column;
   margin: 0.4rem;
   border: black solid;
+  background-color: var(--light-shades);
   border-radius: 2rem;
 `;
 

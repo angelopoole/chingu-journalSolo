@@ -4,7 +4,13 @@ const GlobalStyles = createGlobalStyle`
   :root{
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
    /* // Font Family */
- 
+    /* //color styles */
+    --light-shades: #F5F4F4;
+    --light-accent: #79C780;
+    --main-brand-color: #9FADA9;
+    --dark-accent: #8D8D7E;
+    --dark-shades: #3F393C;
+
   }
 
 
