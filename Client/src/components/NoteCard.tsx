@@ -39,7 +39,13 @@ const StyledButtonContainer = styled.div`
 
 // todo edit on click -> modal for editing your note, send put request to server. user token and feild to edti with edit
 // todo delete button on click => modal asking if you're sure that you want to delete this note, on confirmation send delete request with user headers and note id
-const NoteCard = ({ note }: { note: Note }) => {
+const NoteCard = ({
+  note,
+  deleteNote,
+}: {
+  note: Note;
+  deleteNote: (noteId: number) => void;
+}) => {
   const { _id, body, title, user } = note;
 
   return (
@@ -50,7 +56,7 @@ const NoteCard = ({ note }: { note: Note }) => {
       </StyledContent>
       <StyledButtonContainer className='button-container'>
         <button>edit</button>
-        <button>delete</button>
+        <button onClick={() => deleteNote(_id)}>delete</button>
       </StyledButtonContainer>
     </StyledOuterCard>
   );

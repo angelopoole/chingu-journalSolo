@@ -5,6 +5,7 @@ import { Note } from '../../interfaces/NoteTypes';
 
 type Props = {
   notes: Note[];
+  deleteNote: (noteId: number) => void;
 };
 
 const StyledNoteSection = styled.section`
@@ -17,7 +18,9 @@ const NoteShowcase = (props: Props) => {
   const notesArr = props.notes;
   console.log(notesArr);
   let mappedNotes = notesArr.map(note => {
-    return <NoteCard key={note._id} note={note} />;
+    return (
+      <NoteCard deleteNote={props.deleteNote} key={note._id} note={note} />
+    );
   });
 
   return <StyledNoteSection>{mappedNotes}</StyledNoteSection>;

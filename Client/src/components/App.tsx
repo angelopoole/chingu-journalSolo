@@ -6,6 +6,7 @@ import { ProvideAuth, useAuth } from '../hooks/use-auth';
 import Layout from './Layout';
 import HomePage from '../pages/Homepage';
 import AuthPage from '../pages/AuthPage';
+// import NewFormTest from '../pages/NewFormTest';
 import Loader from './Loader';
 
 // console.log(useAuth);
@@ -38,6 +39,7 @@ function App() {
               <Route path='/' component={HomePage} exact />
               <Route path='/auth/:formTypeParam' component={AuthPage} exact />
               <Route path='/loaderTest' component={Loader} />
+              {/* <Route path='/newFormTest' component={NewFormTest} /> */}
             </Switch>
           </Layout>
         </Router>

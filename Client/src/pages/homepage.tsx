@@ -64,6 +64,18 @@ const HomePage = () => {
     return <div className='login-message'> please login! </div>;
   }
 
+  const deleteNote = async (noteId: number) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${auth.user?.token}`,
+      },
+    };
+    const deleteNote = await axios.delete(`/api/notes/${noteId}`, config);
+    console.log(deleteNote.data);
+    const filtered = userNotes.filter(note => note._id !== noteId);
+    setUserNotes(filtered);
+  };
+
   const updateNotesArray = (newNote: Note) => {
     setUserNotes([...userNotes, newNote]);
   };
@@ -71,7 +83,7 @@ const HomePage = () => {
   return (
     <StyledContainer>
       <NotesForm updateNotesArray={updateNotesArray} />
-      <NoteShowcase notes={userNotes} />
+      <NoteShowcase deleteNote={deleteNote} notes={userNotes} />
     </StyledContainer>
   );
 };
