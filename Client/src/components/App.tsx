@@ -1,34 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import { GlobalStyles } from '../styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ProvideAuth, useAuth } from '../hooks/use-auth';
+
+import { ProvideAuth } from '../hooks/use-auth';
 
 import Layout from './Layout';
+import Loader from './Loader';
 import HomePage from '../pages/Homepage';
 import AuthPage from '../pages/AuthPage';
-// import NewFormTest from '../pages/NewFormTest';
-import Loader from './Loader';
-
-// console.log(useAuth);
 
 function App() {
-  const auth = useAuth();
-
-  const fetchUserData = async () => {
-    return console.log('lol');
-  };
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (isLoading) {
-      fetchUserData();
-    }
-  }, [isLoading]);
-
-  // if (isLoading) {
-  //   return <div>loader</div>;
-  // }
-
   return (
     <div className='App'>
       <ProvideAuth>
@@ -36,10 +16,9 @@ function App() {
           <GlobalStyles />
           <Layout>
             <Switch>
-              <Route path='/' component={HomePage} exact />
               <Route path='/auth/:formTypeParam' component={AuthPage} exact />
               <Route path='/loaderTest' component={Loader} />
-              {/* <Route path='/newFormTest' component={NewFormTest} /> */}
+              <Route path='/' component={HomePage} exact />
             </Switch>
           </Layout>
         </Router>
