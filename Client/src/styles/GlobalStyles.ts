@@ -3,7 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
   :root{
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-   /* // Font Family */
     /* //color styles */
     --light-shades: #F5F4F4;
     --light-accent: #79C780;
