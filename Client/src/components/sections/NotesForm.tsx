@@ -1,21 +1,26 @@
 import axios from 'axios';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/use-auth';
 import { Note } from '../../interfaces/NoteTypes';
 
 import styled from 'styled-components';
 
 const StyledSection = styled.section`
-  min-width: 100vw;
-  min-height: 5rem;
+  /* min-width: 20vw; */
+  /* min-height: 5rem; */
   padding: 1rem;
   background-color: #d94e4e;
-  input {
-    width: 12rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 
-    .form-body {
-      line-height: 3rem;
-    }
+  form {
+    width: 45rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
   }
 `;
 
@@ -25,6 +30,7 @@ const NotesForm = ({
   updateNotesArray: (Note: Note) => void;
 }) => {
   const [noteState, setNoteState] = useState({ title: '', body: '' });
+  const [error, setErrorState] = useState('');
   const auth = useAuth();
 
   const handleChange = (
@@ -38,6 +44,10 @@ const NotesForm = ({
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
+    if (noteState.title.length > 15) {
+      e.preventDefault();
+      return setErrorState('Above character limit: 15');
+    }
     e.preventDefault();
     const config = {
       headers: {
@@ -51,6 +61,13 @@ const NotesForm = ({
     setNoteState({ title: '', body: '' });
   };
 
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      setErrorState('');
+    }
+  }, [error]);
+
   return (
     <StyledSection>
       <form onSubmit={e => handleFormSubmit(e)}>
@@ -62,6 +79,7 @@ const NotesForm = ({
             name='title'
             type='text'
             onChange={e => handleChange(e)}
+            autoComplete='off'
           />
         </label>
         <br />
@@ -73,6 +91,7 @@ const NotesForm = ({
             name='body'
             onChange={e => handleChange(e)}
             className='form-body'
+            autoComplete='off'
           />
         </label>
         <label>
