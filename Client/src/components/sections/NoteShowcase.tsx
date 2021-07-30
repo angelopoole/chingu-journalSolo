@@ -6,6 +6,8 @@ import { Note } from '../../interfaces/NoteTypes';
 type Props = {
   notes: Note[];
   deleteNote: (noteId: number) => void;
+  toggleEditModal: () => void;
+  handleSetNoteToEdit: (note: Note) => void;
 };
 
 const StyledNoteSection = styled.section`
@@ -19,7 +21,13 @@ const NoteShowcase = (props: Props) => {
   console.log(notesArr);
   let mappedNotes = notesArr.map(note => {
     return (
-      <NoteCard deleteNote={props.deleteNote} key={note._id} note={note} />
+      <NoteCard
+        deleteNote={props.deleteNote}
+        key={note._id}
+        note={note}
+        toggleEditModal={props.toggleEditModal}
+        handleSetNoteToEdit={props.handleSetNoteToEdit}
+      />
     );
   });
 

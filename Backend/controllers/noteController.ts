@@ -67,7 +67,8 @@ const updateNote = asyncHandler(async (req: RequestWithUser, res: Response) => {
     res.status(401);
     throw new Error('invalid user information');
   }
+  res.status(201).json('hit update note');
   // payload should be the note id, body and title that we want to update note with
 });
 
-export { getUserNotes, createNote, deleteNote };
+export { getUserNotes, createNote, deleteNote, updateNote };

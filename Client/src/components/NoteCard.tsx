@@ -43,11 +43,20 @@ const StyledButtonContainer = styled.div`
 const NoteCard = ({
   note,
   deleteNote,
+  toggleEditModal,
+  handleSetNoteToEdit,
 }: {
   note: Note;
   deleteNote: (noteId: number) => void;
+  toggleEditModal: () => void;
+  handleSetNoteToEdit: (note: Note) => void;
 }) => {
   const { _id, body, title, user } = note;
+
+  const handleModalAndSetEditNote = (note: Note) => {
+    handleSetNoteToEdit(note);
+    toggleEditModal();
+  };
 
   return (
     <StyledOuterCard>
@@ -56,7 +65,7 @@ const NoteCard = ({
         <p className='body'>{body}</p>
       </StyledContent>
       <StyledButtonContainer className='button-container'>
-        <button>edit</button>
+        <button onClick={() => handleModalAndSetEditNote(note)}>edit</button>
         <button onClick={() => deleteNote(_id)}>delete</button>
       </StyledButtonContainer>
     </StyledOuterCard>

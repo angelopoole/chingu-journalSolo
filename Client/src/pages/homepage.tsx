@@ -8,6 +8,7 @@ import NotesForm from '../components/sections/NotesForm';
 import NoteShowcase from '../components/sections/NoteShowcase';
 
 import { Note } from '../interfaces/NoteTypes';
+import EditNoteModal from '../components/sections/EditNoteModal';
 
 // @desc this pace is protected, will only show notes if user is logged in.
 
@@ -37,8 +38,10 @@ this will require a form and a state to hold form. aswell as the mapping of jour
 
 const HomePage = () => {
   const auth = useAuth();
-
+  const [showModal, setShowModal] = useState(false);
   const [userNotes, setUserNotes] = useState<Note[]>([]);
+  const [noteToEdit, setNoteToEdit] = useState<Note | undefined>();
+
   console.log(userNotes);
 
   const fetchPosts = async (userToken: string) => {
@@ -82,10 +85,37 @@ const HomePage = () => {
     setUserNotes([...userNotes, newNote]);
   };
 
+  const toggleEditModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const handleSetNoteToEdit = (selectedNote: Note) => {
+    setNoteToEdit(selectedNote);
+  };
+
+  const handleEditNoteSubmit = (editedNote: Note) => {
+    // takes in a note, finds same note in notes array, removes that note and replaces it with this note,
+
+    setNoteToEdit(undefined);
+  };
+
+  // const editNote = () => {};
+
   return (
     <StyledContainer>
+      <EditNoteModal
+        showModal={showModal}
+        toggleEditModal={toggleEditModal}
+        noteToEdit={noteToEdit}
+        handleEditNoteSubmit={handleEditNoteSubmit}
+      />
       <NotesForm updateNotesArray={updateNotesArray} />
-      <NoteShowcase deleteNote={deleteNote} notes={userNotes} />
+      <NoteShowcase
+        deleteNote={deleteNote}
+        notes={userNotes}
+        toggleEditModal={toggleEditModal}
+        handleSetNoteToEdit={handleSetNoteToEdit}
+      />
     </StyledContainer>
   );
 };

@@ -5,6 +5,8 @@ import { Note } from '../../interfaces/NoteTypes';
 
 import styled from 'styled-components';
 
+// !TODO make notes form reusable for modal.
+
 const StyledSection = styled.section`
   /* min-width: 20vw; */
   /* min-height: 5rem; */
@@ -44,9 +46,9 @@ const NotesForm = ({
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
-    if (noteState.title.length > 15) {
+    if (noteState.title.length > 15 || noteState.body.length > 260) {
       e.preventDefault();
-      return setErrorState('Above character limit: 15');
+      return setErrorState('Above character limit');
     }
     e.preventDefault();
     const config = {
