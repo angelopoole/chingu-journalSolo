@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavBar from './NavBar';
+import Footer from './sections/Footer';
 
 const StyledMainContent = styled.main`
   background-color: var(--dark-shades);
@@ -13,7 +14,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <NavBar />
       <StyledMainContent>{children}</StyledMainContent>
-      <footer>this be a footer</footer>
+      <Footer />
     </>
   );
 };

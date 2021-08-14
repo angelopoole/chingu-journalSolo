@@ -5,18 +5,20 @@ import { Note } from '../interfaces/NoteTypes';
 const StyledOuterCard = styled.div`
   display: flex;
   flex-flow: column;
+  justify-content: space-between;
   margin: 0.4rem;
-  border: black solid;
+
+  border: var(--dark-accent) inset;
   background-color: var(--light-shades);
-  border-radius: 2rem;
+  border-radius: 1.5rem;
 `;
 
 const StyledContent = styled.div`
   .title {
-    background-color: #d9934e;
-    margin-top: 0.1rem;
-    border-top-left-radius: 2.3rem;
-    border-top-right-radius: 2.3rem;
+    background-color: var(--light-accent);
+    margin-top: 0;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
     text-align: center;
   }
 `;
@@ -27,14 +29,17 @@ const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-content: flex-end;
+  /* bottom: 0; */
+  margin-bottom: 4px;
   /* align-self: flex-end; */
   button {
     all: unset;
-    background-color: coral;
+    background-color: var(--light-accent);
     padding: 0.3rem;
     min-width: 38.203px;
     text-align: center;
     border-radius: 2rem;
+    bottom: 0;
   }
 `;
 

@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { RouteComponentProps, useParams, Redirect } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import Loader from '../components/Loader';
+import styled from 'styled-components';
 
 // todo: show user error on wrong login information.
 // todo; update error on useAuth component
@@ -10,6 +11,30 @@ interface FormInput {
   password: string;
   name: string;
 }
+
+const StyledLoginMessage = styled.div`
+  min-height: 90vh;
+  background-color: var(--dark-shades);
+  width: 100%;
+
+  .login-form {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: auto;
+    padding: 10% 20% 20% 20%;
+    background-color: blanchedalmond;
+    height: 100vh;
+  }
+
+  .login-message {
+    text-align: center;
+    margin: auto;
+    background-color: inherit;
+
+    height: 0px;
+  }
+`;
 
 const AuthPage = (props: RouteComponentProps) => {
   const { formTypeParam }: { formTypeParam: string } = useParams();
@@ -62,43 +87,46 @@ const AuthPage = (props: RouteComponentProps) => {
 
   return (
     <>
-      <div>{formTypeParam} here</div>
-      <form onSubmit={e => handleSubmit(e)}>
-        {formTypeParam === 'signup' ? (
+      <StyledLoginMessage>
+        <div className='login-message'>{formTypeParam} here</div>
+        <form onSubmit={e => handleSubmit(e)} className='login-form'>
+          {formTypeParam === 'signup' ? (
+            <label>
+              Name:
+              <input
+                name='name'
+                type='text'
+                value={formInput.name}
+                onChange={event => handleFormChange(event)}
+              />
+            </label>
+          ) : null}
           <label>
-            Name:
+            Email:
             <input
-              name='name'
+              name='email'
               type='text'
-              value={formInput.name}
+              value={formInput.email}
               onChange={event => handleFormChange(event)}
             />
           </label>
-        ) : null}
 
-        <label>
-          Email:
-          <input
-            name='email'
-            type='text'
-            value={formInput.email}
-            onChange={event => handleFormChange(event)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            name='password'
-            type='text'
-            value={formInput.password}
-            onChange={event => handleFormChange(event)}
-          />
-        </label>
-        <label>
-          Submit:
-          <input name='submit' type='submit' />
-        </label>
-      </form>
+          <label>
+            Password:
+            <input
+              name='password'
+              type='text'
+              value={formInput.password}
+              onChange={event => handleFormChange(event)}
+            />
+          </label>
+
+          <label>
+            Submit:
+            <input name='submit' type='submit' />
+          </label>
+        </form>
+      </StyledLoginMessage>
     </>
   );
 };

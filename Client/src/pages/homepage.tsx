@@ -66,7 +66,11 @@ const HomePage = () => {
   }, [auth?.user]);
 
   if (!auth?.user) {
-    return <div className='login-message'> please login! </div>;
+    return (
+      <StyledContainer>
+        <div className='login-message'> please login!</div>
+      </StyledContainer>
+    );
   }
 
   const deleteNote = async (noteId: number) => {

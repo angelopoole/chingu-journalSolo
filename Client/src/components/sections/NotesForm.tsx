@@ -10,8 +10,10 @@ import styled from 'styled-components';
 const StyledSection = styled.section`
   /* min-width: 20vw; */
   /* min-height: 5rem; */
+  border-top: var(--dark-accent) 3px solid;
+  border-bottom: var(--dark-accent) 3px solid;
   padding: 1rem;
-  background-color: #d94e4e;
+  background-color: var(--main-brand-color);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -48,7 +50,9 @@ const NotesForm = ({
   const handleFormSubmit = async (e: FormEvent) => {
     if (noteState.title.length > 15 || noteState.body.length > 260) {
       e.preventDefault();
-      return setErrorState('Above character limit');
+      return setErrorState(
+        `Above character limit title:(${noteState.title.length} / 15) body:(${noteState.body.length} / 260)  `
+      );
     }
     e.preventDefault();
     const config = {
