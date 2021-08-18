@@ -13,17 +13,9 @@ type Props = {
 const StyledNoteSection = styled.section`
   display: grid;
 
-  opacity: 0.8;
-  background-image: radial-gradient(
-      var(--light-accent) 0.8px,
-      transparent 0.8px
-    ),
-    radial-gradient(var(--light-accent) 0.8px, var(--light-shades) 0.8px);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
-
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+  /* height: 100%; */
 `;
 
 const NoteShowcase = (props: Props) => {

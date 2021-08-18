@@ -8,38 +8,51 @@ const StyledOuterCard = styled.div`
   justify-content: space-between;
   margin: 0.4rem;
 
-  border: var(--dark-accent) inset;
+  border: var(--dark-accent) solid;
   background-color: var(--light-shades);
-  border-radius: 1.5rem;
+  border-radius: 1rem;
 `;
 
 const StyledContent = styled.div`
+  height: 80%;
+  border-bottom: 3px var(--dark-accent) solid;
   .title {
     background-color: var(--light-accent);
     margin-top: 0;
-    border-top-left-radius: 3rem;
-    border-top-right-radius: 3rem;
+    margin-bottom: 0.1rem;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
     text-align: center;
+  }
+
+  p {
+    height: 80%;
+    margin: 0.3rem;
   }
 `;
 
 const StyledButtonContainer = styled.div`
   justify-self: flex-end;
-
   display: flex;
   justify-content: space-around;
   align-content: flex-end;
-  /* bottom: 0; */
-  margin-bottom: 4px;
-  /* align-self: flex-end; */
+  height: 20%;
+
   button {
     all: unset;
-    background-color: var(--light-accent);
-    padding: 0.3rem;
-    min-width: 38.203px;
+    /* min-width: 50%; */
+    width: 100%;
+    border: 1px var(--dark-accent) solid;
     text-align: center;
-    border-radius: 2rem;
-    bottom: 0;
+  }
+
+  button:nth-child(1) {
+    border-bottom-left-radius: 0.8rem;
+    background-color: var(--light-accent);
+  }
+  button:nth-child(2) {
+    border-bottom-right-radius: 0.8rem;
+    background-color: red;
   }
 `;
 

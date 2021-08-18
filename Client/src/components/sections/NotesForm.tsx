@@ -8,8 +8,6 @@ import styled from 'styled-components';
 // !TODO make notes form reusable for modal.
 
 const StyledSection = styled.section`
-  /* min-width: 20vw; */
-  /* min-height: 5rem; */
   border-top: var(--dark-accent) 3px solid;
   border-bottom: var(--dark-accent) 3px solid;
   padding: 1rem;
@@ -22,9 +20,14 @@ const StyledSection = styled.section`
     width: 45rem;
   }
 
+  #title {
+    font-size: 1.3rem;
+  }
+
   input,
   textarea {
     width: 100%;
+    resize: none;
   }
 `;
 
@@ -78,24 +81,25 @@ const NotesForm = ({
     <StyledSection>
       <form onSubmit={e => handleFormSubmit(e)}>
         <label>
-          title:
           <br />
           <input
+            id='title'
             value={noteState.title}
             name='title'
             type='text'
+            placeholder='Title'
             onChange={e => handleChange(e)}
             autoComplete='off'
           />
         </label>
         <br />
         <label>
-          body:
           <br />
           <textarea
             value={noteState.body}
             name='body'
             onChange={e => handleChange(e)}
+            placeholder='Body'
             className='form-body'
             autoComplete='off'
           />

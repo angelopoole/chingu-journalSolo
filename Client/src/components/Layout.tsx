@@ -4,7 +4,7 @@ import NavBar from './NavBar';
 import Footer from './sections/Footer';
 
 const StyledMainContent = styled.main`
-  background-color: var(--dark-shades);
+  /* background-color: var(--dark-shades); */
   display: flex;
   flex-flow: column;
 `;
