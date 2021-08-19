@@ -35,12 +35,9 @@ function useProvideAuth() {
     };
 
     const data: User = await axios.get('/api/users/login/token', config);
-    console.log('userHereToken', data);
+    // console.log('userHereToken', data);
     setUser({ ...data, token });
   };
-  if (localStorage.token && !user) {
-    persistState(localStorage.token);
-  }
 
   // @desc fetches user from backend using email + string.
   const signin = async (email: string, password: string) => {
@@ -121,7 +118,12 @@ function useProvideAuth() {
   };
 
   useEffect(() => {
-    console.log('useAuth useEffect');
+    // conditional moved from outside of function as it was causing mutliple re-renders of homepage.
+    if (localStorage.token && user === null) {
+      persistState(localStorage.token);
+    }
+
+    console.log('useAuth useEffect', user, error, loading);
   }, [user, error, loading]);
 
   return {

@@ -20,7 +20,7 @@ const StyledNoteSection = styled.section`
 
 const NoteShowcase = (props: Props) => {
   const notesArr = props.notes;
-  console.log(notesArr);
+  // console.log(notesArr);
   let mappedNotes = notesArr.map(note => {
     return (
       <NoteCard

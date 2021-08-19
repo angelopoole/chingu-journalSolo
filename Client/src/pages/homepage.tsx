@@ -49,7 +49,9 @@ const HomePage = () => {
   const [userNotes, setUserNotes] = useState<Note[]>([]);
   const [noteToEdit, setNoteToEdit] = useState<Note | undefined>();
 
-  console.log(userNotes);
+  console.log('userNotes -> ', userNotes);
+  // console.log('note to edit -> ', noteToEdit);
+  // console.log('auth -> ', auth?.user);
 
   const fetchPosts = async (userToken: string) => {
     const config = {

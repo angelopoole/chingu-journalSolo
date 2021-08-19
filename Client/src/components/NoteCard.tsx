@@ -42,17 +42,24 @@ const StyledButtonContainer = styled.div`
     all: unset;
     /* min-width: 50%; */
     width: 100%;
-    border: 1px var(--dark-accent) solid;
     text-align: center;
+    cursor: pointer;
   }
-
   button:nth-child(1) {
+    margin-right: 0;
+    border-right: 0.3rem var(--dark-accent) solid;
     border-bottom-left-radius: 0.8rem;
     background-color: var(--light-accent);
   }
   button:nth-child(2) {
+    margin-left: 0;
+    border-left: 0.3rem var(--dark-accent) solid;
     border-bottom-right-radius: 0.8rem;
     background-color: red;
+  }
+
+  button:hover {
+    background-color: yellow;
   }
 `;
 
