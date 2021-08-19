@@ -76,7 +76,8 @@ const NoteCard = ({
   toggleEditModal: () => void;
   handleSetNoteToEdit: (note: Note) => void;
 }) => {
-  const { _id, body, title, user } = note;
+  const { _id, body, title } = note;
+  // user -> note
 
   const handleModalAndSetEditNote = (note: Note) => {
     handleSetNoteToEdit(note);

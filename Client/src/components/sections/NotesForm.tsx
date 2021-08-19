@@ -51,16 +51,16 @@ const NotesForm = ({
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
-    if (noteState.title.length > 15 || noteState.body.length > 260) {
-      e.preventDefault();
+    e.preventDefault();
+    if (noteState.title.length > 20 || noteState.body.length > 260) {
       return setErrorState(
         `Above character limit title:(${noteState.title.length} / 15) body:(${noteState.body.length} / 260)  `
       );
     }
-    e.preventDefault();
+    // e.preventDefault();
     const config = {
       headers: {
-        Authorization: `Bearer ${auth?.user?.token}`,
+        Authorization: `Bearer ${auth.user?.token}`,
         'Content-Type': 'application/json',
       },
     };

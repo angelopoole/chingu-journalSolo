@@ -63,16 +63,12 @@ const HomePage = () => {
     return setUserNotes(data);
   };
   useEffect(() => {
-    if (localStorage.token) {
-      console.log('token found');
-    }
-    if (auth?.user) {
+    if (auth.user) {
       fetchPosts(auth.user.token);
-    }
-    if (!auth?.user) {
+    } else {
       setUserNotes([]);
     }
-  }, [auth?.user]);
+  }, [auth.user]);
 
   if (!auth?.user) {
     return (

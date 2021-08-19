@@ -1,7 +1,7 @@
 import { User } from './userInterfaces';
 
 interface Auth {
-  user: User | null;
+  user: User | undefined;
   loading: boolean;
   error: string | null;
   signin: (email: string, password: string) => void;
