@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
-import AuthPage from '../pages/AuthPage';
+// import AuthPage from '../pages/AuthPage';
 
 const StyledNavContainer = styled.div`
   width: 100%;
@@ -76,7 +76,7 @@ const NavBar = () => {
         </div>
         <div className='login-logout-cluster'>
           <StyledUl>
-            {auth?.user ? (
+            {auth.user ? (
               <button
                 className='nav-button sign-out'
                 onClick={() => auth.signout()}

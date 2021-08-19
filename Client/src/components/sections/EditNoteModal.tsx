@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect, FormEvent } from 'react';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Note } from '../../interfaces/NoteTypes';
 

@@ -61,7 +61,7 @@ const AuthPage = (props: RouteComponentProps) => {
     e.preventDefault();
     if (formTypeParam === 'login') {
       const { email, password } = formInput;
-      const authSignIn = await auth?.signin(email, password);
+      const authSignIn = await auth.signin(email, password);
       return authSignIn;
     }
     if (formTypeParam === 'signup') {
@@ -81,7 +81,7 @@ const AuthPage = (props: RouteComponentProps) => {
     return <Loader />;
   }
 
-  if (auth?.user) {
+  if (auth.user) {
     return <Redirect to='/' />;
   }
 

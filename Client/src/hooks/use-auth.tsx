@@ -9,7 +9,7 @@ import React, {
 import axios from 'axios';
 import { Auth } from '../interfaces/AuthInterface';
 import { User } from '../interfaces/userInterfaces';
-const authContext = createContext<Auth | undefined>(undefined);
+const authContext = createContext<Auth>({} as Auth);
 
 export const ProvideAuth = ({ children }: { children: ReactNode }) => {
   const auth = useProvideAuth();
@@ -17,17 +17,20 @@ export const ProvideAuth = ({ children }: { children: ReactNode }) => {
 };
 
 export const useAuth = () => {
+  // console.count('useAuth call');
   return useContext(authContext);
 };
 
 function useProvideAuth() {
-  const [user, setUser] = useState<User | null>(null);
+  console.count('useProvideAuth');
+  const [user, setUser] = useState<User | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
 
   const persistState = async (token: string) => {
+    console.count('persistState');
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,6 +44,7 @@ function useProvideAuth() {
 
   // @desc fetches user from backend using email + string.
   const signin = async (email: string, password: string) => {
+    console.count('signIn');
     try {
       const config = {
         headers: {
@@ -60,6 +64,7 @@ function useProvideAuth() {
   };
 
   const signup = async (name: string, email: string, password: string) => {
+    console.count('signUp');
     setLoading(true);
     try {
       const config = {
@@ -91,7 +96,9 @@ function useProvideAuth() {
   };
 
   const signout = () => {
-    setUser(null);
+    console.count('signOut');
+
+    setUser(undefined);
     localStorage.clear();
   };
 
@@ -114,16 +121,16 @@ function useProvideAuth() {
   // };
 
   const clearError = () => {
+    console.count('clear error');
     return setError(null);
   };
 
   useEffect(() => {
-    // conditional moved from outside of function as it was causing mutliple re-renders of homepage.
-    if (localStorage.token && user === null) {
+    console.count('useAuth useEffect');
+    if (localStorage.token && !user) {
       persistState(localStorage.token);
     }
-
-    console.log('useAuth useEffect', user, error, loading);
+    // console.log('useAuth useEffect', user, error, loading);
   }, [user, error, loading]);
 
   return {
