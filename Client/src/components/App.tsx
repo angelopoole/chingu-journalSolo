@@ -7,23 +7,27 @@ import Layout from './Layout';
 import Loader from './Loader';
 import HomePage from '../pages/Homepage';
 import AuthPage from '../pages/AuthPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 function App() {
   return (
-    <div className='App'>
-      <ProvideAuth>
-        <Router>
-          <GlobalStyles />
-          <Layout>
-            <Switch>
-              <Route path='/auth/:formTypeParam' component={AuthPage} exact />
-              <Route path='/loaderTest' component={Loader} />
-              <Route path='/' component={HomePage} exact />
-            </Switch>
-          </Layout>
-        </Router>
-      </ProvideAuth>
-    </div>
+    <>
+      <GlobalStyles />
+      <div className='App'>
+        <ProvideAuth>
+          <Router>
+            <Layout>
+              <Switch>
+                <Route path='/auth/:formTypeParam' component={AuthPage} exact />
+                <Route path='/loaderTest' component={Loader} />
+                <Route path='/' component={HomePage} exact />
+                <Route path='*' component={NotFoundPage} />
+              </Switch>
+            </Layout>
+          </Router>
+        </ProvideAuth>
+      </div>
+    </>
   );
 }
 

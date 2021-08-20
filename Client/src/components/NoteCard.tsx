@@ -31,6 +31,8 @@ const StyledContent = styled.div`
   }
 `;
 
+// TODO, fix how cards are created, instead go with a 4 area grid so that the outer card controlls the coloring on hover.
+
 const StyledButtonContainer = styled.div`
   justify-self: flex-end;
   display: flex;
@@ -42,6 +44,9 @@ const StyledButtonContainer = styled.div`
     all: unset;
     /* min-width: 50%; */
     width: 100%;
+    height: 100%;
+
+    /* min-height: 24px; */
     text-align: center;
     cursor: pointer;
   }

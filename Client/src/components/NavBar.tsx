@@ -2,21 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
-// import AuthPage from '../pages/AuthPage';
 
-const StyledNavContainer = styled.div`
-  width: 100%;
+const StyledNavBar = styled.nav`
   background-color: var(--main-brand-color);
-  border: 0;
-`;
 
+  li {
+    list-style: none;
+  }
+`;
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
 
-const StyledNavBar = styled.nav`
+const StyledUl = styled.ul`
   display: flex;
+  padding: 0;
+  min-width: 100%;
+  margin: 0px 0.5rem 0px 0.5rem;
 
   .sign-out {
     all: unset;
@@ -40,63 +43,50 @@ const StyledNavBar = styled.nav`
     }
   }
 
-  li {
-    list-style: none;
-  }
-
-  .login-logout-cluster {
-    display: flex;
-    justify-self: flex-end;
+  li.align-left {
     margin-left: auto;
+    margin-right: 0.5rem;
   }
-
-  .interaction-buttons {
-    display: flex;
-  }
-`;
-
-const StyledUl = styled.ul`
-  padding: 0;
-  display: flex;
-  margin: 0px 0.5rem 0px 0.5rem;
 `;
 const NavBar = () => {
   const auth = useAuth();
 
   return (
-    <StyledNavContainer>
+    <>
       <StyledNavBar>
-        <div className='interaction-buttons'>
-          <StyledUl>
+        <StyledUl>
+          <li>
             <StyledLink className='nav-button' to='/'>
-              Journal
+              Chingu-Journal
             </StyledLink>
-            <li className='nav-button'>Create a note</li>
-          </StyledUl>
-        </div>
-        <div className='login-logout-cluster'>
-          <StyledUl>
-            {auth.user ? (
+          </li>
+          <li className='nav-button'>Create a note</li>
+          {auth.user ? (
+            <li className='align-left'>
               <button
                 className='nav-button sign-out'
                 onClick={() => auth.signout()}
               >
                 sign out
               </button>
-            ) : (
-              <>
+            </li>
+          ) : (
+            <>
+              <li className='align-left'>
                 <StyledLink className='nav-button' to='/auth/login'>
                   login
                 </StyledLink>
+              </li>
+              <li>
                 <StyledLink className='nav-button' to='/auth/signup'>
                   signup
                 </StyledLink>
-              </>
-            )}
-          </StyledUl>
-        </div>
+              </li>
+            </>
+          )}
+        </StyledUl>
       </StyledNavBar>
-    </StyledNavContainer>
+    </>
   );
 };
 

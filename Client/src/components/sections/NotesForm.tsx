@@ -12,12 +12,15 @@ const StyledSection = styled.section`
   border-bottom: var(--dark-accent) 3px solid;
   padding: 1rem;
   background-color: var(--main-brand-color);
+
+  width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
 
   form {
-    width: 45rem;
+    width: 100%;
+    max-width: 40rem;
   }
 
   #title {
@@ -52,7 +55,7 @@ const NotesForm = ({
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (noteState.title.length > 20 || noteState.body.length > 260) {
+    if (noteState.title.length > 30 || noteState.body.length > 260) {
       return setErrorState(
         `Above character limit title:(${noteState.title.length} / 15) body:(${noteState.body.length} / 260)  `
       );

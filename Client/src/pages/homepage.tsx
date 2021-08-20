@@ -14,7 +14,7 @@ import EditNoteModal from '../components/sections/EditNoteModal';
 
 const StyledContainer = styled.div`
   min-height: 90vh;
-  width: 100%;
+  min-width: 100%;
 
   background-image: radial-gradient(
       var(--light-accent) 0.8px,
@@ -53,6 +53,14 @@ const HomePage = () => {
   // console.log('note to edit -> ', noteToEdit);
   // console.log('auth -> ', auth?.user);
 
+  useEffect(() => {
+    if (auth.user) {
+      fetchPosts(auth.user.token);
+    } else {
+      setUserNotes([]);
+    }
+  }, [auth.user]);
+
   const fetchPosts = async (userToken: string) => {
     const config = {
       headers: {
@@ -62,13 +70,6 @@ const HomePage = () => {
     const { data }: { data: [] } = await axios.get('/api/notes', config);
     return setUserNotes(data);
   };
-  useEffect(() => {
-    if (auth.user) {
-      fetchPosts(auth.user.token);
-    } else {
-      setUserNotes([]);
-    }
-  }, [auth.user]);
 
   if (!auth?.user) {
     return (
@@ -90,6 +91,7 @@ const HomePage = () => {
     setUserNotes(filtered);
   };
 
+  // creates a new note from note object.
   const updateNotesArray = (newNote: Note) => {
     setUserNotes([...userNotes, newNote]);
   };
@@ -104,7 +106,6 @@ const HomePage = () => {
 
   const handleEditNoteSubmit = (editedNote: Note) => {
     // takes in a note, finds same note in notes array, removes that note and replaces it with this note,
-
     setNoteToEdit(undefined);
   };
 
@@ -114,8 +115,8 @@ const HomePage = () => {
     <StyledContainer>
       <EditNoteModal
         showModal={showModal}
-        toggleEditModal={toggleEditModal}
         noteToEdit={noteToEdit}
+        toggleEditModal={toggleEditModal}
         handleEditNoteSubmit={handleEditNoteSubmit}
       />
       <NotesForm updateNotesArray={updateNotesArray} />

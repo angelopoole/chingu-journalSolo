@@ -13,8 +13,8 @@ type Props = {
 const StyledNoteSection = styled.section`
   display: grid;
 
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  grid-auto-rows: minmax(10em, 1fr);
   /* height: 100%; */
 `;
 

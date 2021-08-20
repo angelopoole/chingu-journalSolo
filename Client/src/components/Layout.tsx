@@ -6,6 +6,8 @@ import Footer from './sections/Footer';
 const StyledMainContent = styled.main`
   /* background-color: var(--dark-shades); */
   display: flex;
+  /* width: 43rem; */
+  min-width: 100%;
   flex-flow: column;
 `;
 
