@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ProvideAuth } from '../hooks/use-auth';
 
 import Layout from './Layout';
-import HomePage from '../pages/Homepage';
 import AuthPage from '../pages/AuthPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import HomePage from '../pages/Homepage';
 
 function App() {
   return (
