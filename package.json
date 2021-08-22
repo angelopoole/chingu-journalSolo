@@ -10,7 +10,8 @@
     "dev-server": "concurrently \"npm run server\" \"npm run client\"",
     "build": "tsc --project ./",
     "prod": "tsc && node ./backend/build/app.js",
-    "dev---transpile": "ts-node-dev --respawn --transpileOnly ./backend/server.js"
+    "dev---transpile": "ts-node-dev --respawn --transpileOnly ./backend/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "type": "module",
   "author": "Angelo Poole",
