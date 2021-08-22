@@ -6,7 +6,7 @@ import { ProvideAuth } from '../hooks/use-auth';
 import Layout from './Layout';
 import AuthPage from '../pages/AuthPage';
 import NotFoundPage from '../pages/NotFoundPage';
-import HomePage from '../pages/HomePage.js';
+import HomePage from '../pages/HomePage';
 
 function App() {
   return (
