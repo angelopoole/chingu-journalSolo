@@ -42,11 +42,8 @@ const StyledButtonContainer = styled.div`
 
   button {
     all: unset;
-    /* min-width: 50%; */
     width: 100%;
     height: 100%;
-
-    /* min-height: 24px; */
     text-align: center;
     cursor: pointer;
   }
@@ -68,8 +65,6 @@ const StyledButtonContainer = styled.div`
   }
 `;
 
-// todo edit on click -> modal for editing your note, send put request to server. user token and feild to edti with edit
-// todo delete button on click => modal asking if you're sure that you want to delete this note, on confirmation send delete request with user headers and note id
 const NoteCard = ({
   note,
   deleteNote,
@@ -82,7 +77,6 @@ const NoteCard = ({
   handleSetNoteToEdit: (note: Note) => void;
 }) => {
   const { _id, body, title } = note;
-  // user -> note
 
   const handleModalAndSetEditNote = (note: Note) => {
     handleSetNoteToEdit(note);

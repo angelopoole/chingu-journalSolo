@@ -49,23 +49,11 @@ app.get('/fileStats', (req, res) => {
   }
 });
 
-app.get('/file/read', async (req, res) => {
-  await fs.readFile(
-    path.resolve(__dirname + '/data/data.txt'),
-    'utf8',
-    (err, data) => {
-      if (err) {
-        console.error(`error ${err}`.red);
-      }
-      console.log(`good to go:`.bold + `${data}`.green.underline);
-    }
-  );
-}); //
 app.use(errorHandler);
 app.use(notFound);
 
 app.listen(PORT, () => {
   console.log(
-    `⚡️[server]: Server is running at https://localhost:${PORT}`.trap.yellow
+    `⚡️[server]: Server is running at https://localhost:${PORT}`.yellow.bold
   );
 });

@@ -4,7 +4,6 @@ import { useAuth } from '../hooks/use-auth';
 import Loader from '../components/Loader';
 import styled from 'styled-components';
 
-// todo: show user error on wrong login information.
 // todo; update error on useAuth component
 interface FormInput {
   email: string;
@@ -39,7 +38,6 @@ const StyledLoginMessage = styled.div`
 const AuthPage = (props: RouteComponentProps) => {
   const { formTypeParam }: { formTypeParam: string } = useParams();
   const auth = useAuth();
-  // auth has .user, .loading, .error
 
   const [formInput, SetFormInput] = useState<FormInput>({
     name: '',
@@ -47,12 +45,11 @@ const AuthPage = (props: RouteComponentProps) => {
     password: '',
   });
 
-  // handle formOnchange, sets formInput
   const handleFormChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const target = e.target;
     const value = target.value;
     const name = target.name;
-    // grabs form input name, and form input values then sets them to eachother.
+
     SetFormInput({ ...formInput, [name]: value });
   };
 
@@ -62,17 +59,16 @@ const AuthPage = (props: RouteComponentProps) => {
     if (formTypeParam === 'login') {
       const { email, password } = formInput;
       const authSignIn = await auth.signin(email, password);
+
+      if (typeof authSignIn === 'object') {
+        alert('WRONG USERNAME OR PASSWORD'); // mvp, here we can set this message to an error handler state or something.
+      }
+
       return authSignIn;
     }
     if (formTypeParam === 'signup') {
       const { name, email, password } = formInput;
-      const authSignup = await auth?.signup(name, email, password);
-      console.log(
-        'EXT:AUTHSIGNUP',
-        authSignup,
-        'USEAUTH STATE > AUTHPAGE',
-        auth?.error
-      );
+      await auth?.signup(name, email, password);
     }
     SetFormInput({ name: '', email: '', password: '' });
   };
@@ -102,7 +98,7 @@ const AuthPage = (props: RouteComponentProps) => {
             </label>
           ) : null}
           <label>
-            Email:
+            Email/Username:
             <input
               name='email'
               type='text'
@@ -115,7 +111,7 @@ const AuthPage = (props: RouteComponentProps) => {
             Password:
             <input
               name='password'
-              type='text'
+              type='password'
               value={formInput.password}
               onChange={event => handleFormChange(event)}
             />

@@ -15,13 +15,12 @@ const protect = asyncHandler(
     ) {
       try {
         token = req.headers.authorization.split(' ')[1];
-        console.log(`${token}`.cyan.bold);
         const decoded = jwt.verify(token, process.env.JWT_SECRET!);
 
         req.user = await User.findById(
           (decoded as decodedSignature).userId
         ).select('-password');
-        console.log(req.user);
+
         next();
       } catch (error) {
         res.status(401);
@@ -33,12 +32,6 @@ const protect = asyncHandler(
       res.status(401);
       throw new Error('Not authorized, no token');
     }
-    // req headder should have authorization, authorization should start with 'Bearer'
-
-    // if req.headers.authorization && req.headers.authorization.startsWith('Bearer')
-    //grab token from bearer by splitting
-
-    // if(r)
   }
 );
 

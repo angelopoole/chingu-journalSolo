@@ -8,11 +8,9 @@ const StyledLoader = styled.div`
   min-height: 100%;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(1, 90vh);
-  /* height: 40rem; */
 
   li {
     display: flex;
-    /* height: auto; */
     flex: 1;
     justify-content: center;
     align-items: center;

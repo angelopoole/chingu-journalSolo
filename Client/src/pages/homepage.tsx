@@ -33,27 +33,11 @@ const StyledContainer = styled.div`
   }
 `;
 
-/*
-homepage will display all journals + give you the ablity to post a journal 
-this will require a form and a state to hold form. aswell as the mapping of journalEntries to an array of components eg: <JournalEntrieList>
-*/
-
-/* 
-  !this page is going to be protected
-  should show signin / login page in case they arent signed in. this will be done with token auth
-  */
-
 const HomePage = () => {
   const auth = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [userNotes, setUserNotes] = useState<Note[]>([]);
   const [noteToEdit, setNoteToEdit] = useState<Note | undefined>(undefined);
-
-  // console.log('userNotes -> ', userNotes);
-  console.log('note to edit ->', noteToEdit);
-  console.log('userNotes --->', userNotes);
-  // console.log('note to edit -> ', noteToEdit);
-  // console.log('auth -> ', auth?.user);
 
   useEffect(() => {
     if (auth.user) {
@@ -87,8 +71,7 @@ const HomePage = () => {
         Authorization: `Bearer ${auth.user?.token}`,
       },
     };
-    const deleteNote = await axios.delete(`/api/notes/${noteId}`, config);
-    console.log(deleteNote.data);
+    await axios.delete(`/api/notes/${noteId}`, config);
     const filtered = userNotes.filter(note => note._id !== noteId);
     setUserNotes(filtered);
   };
@@ -143,8 +126,6 @@ const HomePage = () => {
     setUserNotes(filteredNote);
     setNoteToEdit(undefined);
   };
-
-  // const editNote = () => {};
 
   return (
     <StyledContainer>

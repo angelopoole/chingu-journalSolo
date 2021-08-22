@@ -5,8 +5,4 @@ type Note = {
   user: string;
 };
 
-// interface HomepageUserNoteState = {
-//   Note: []
-// }
-
 export type { Note };

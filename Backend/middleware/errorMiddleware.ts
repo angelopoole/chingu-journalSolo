@@ -12,7 +12,6 @@ const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('errorHandler'.yellow);
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.status(statusCode);
   res.json({

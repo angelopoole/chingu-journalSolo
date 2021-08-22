@@ -35,7 +35,6 @@ const getUserNotes = asyncHandler(async (req: RequestWithUser, res) => {
     throw new Error('No user info');
   }
   const userNotes = await Note.find({ user: req?.user?._id });
-  console.log(userNotes);
   res.status(201).json(userNotes);
 });
 
@@ -77,10 +76,7 @@ const updateNote = asyncHandler(async (req: RequestWithUser, res: Response) => {
 
   note.title = req.body.title;
   note.body = req.body.body;
-
   note.save();
-  console.log(`${note}`.green);
-  console.log(req.params, req.body);
 
   res.status(201).json('Note saved');
 

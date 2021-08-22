@@ -53,6 +53,7 @@ const NotesForm = ({
     setNoteState({ ...noteState, [name]: value });
   };
 
+  // todo: create counter component that sits inside of input to the right to count how many characters are left over
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const { title, body } = noteState;
@@ -77,7 +78,6 @@ const NotesForm = ({
     try {
       const { data } = await axios.post('/api/notes', noteState, config);
       updateNotesArray(data);
-      console.log('data', data);
     } catch (error) {
       console.error('SORRY ' + error.message);
       alert(error.message);

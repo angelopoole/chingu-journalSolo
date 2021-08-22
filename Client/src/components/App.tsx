@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ProvideAuth } from '../hooks/use-auth';
 
 import Layout from './Layout';
-import Loader from './Loader';
 import HomePage from '../pages/Homepage';
 import AuthPage from '../pages/AuthPage';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -19,7 +18,6 @@ function App() {
             <Layout>
               <Switch>
                 <Route path='/auth/:formTypeParam' component={AuthPage} exact />
-                <Route path='/loaderTest' component={Loader} />
                 <Route path='/' component={HomePage} exact />
                 <Route path='*' component={NotFoundPage} />
               </Switch>

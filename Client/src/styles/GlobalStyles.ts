@@ -23,10 +23,8 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body{
-  /* color: #ECECEC; */
   margin: 0 auto;
-  /* width: 100%; */
-  /* min-height: 100%; */
+
 }
 
 .App{

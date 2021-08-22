@@ -11,29 +11,26 @@ const ModalBackground = styled.div`
 
   background: rgba(0, 0, 0, 0.5);
   z-index: 3;
-  /* z-index: 999; */
 `;
 
 const StyledModalBackground = styled.div`
-  height: 50%; /* Set your own height: percents, ems, whatever! */
-  width: 50%; /* Set your own width: percents, ems, whatever! */
-  overflow: auto; /* Recommended in case content is larger than the container */
-  margin: auto; /* Center the item vertically & horizontally */
-  position: absolute; /* Break it out of the regular flow */
+  height: 50%;
+  width: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  right: 0; /* Set the bounds in which to center it, relative to its parent/container */
+  right: 0;
   background-color: var(--main-brand-color);
 
-  /* .Absolute-Center.is-Fixed { */
   position: fixed;
   z-index: 999;
-  /* } */
 
   .Absolute-Center.is-Variable {
     display: table;
-    height: auto; /* Only necessary because height was already declared */
+    height: auto;
   }
 `;
 
@@ -48,12 +45,10 @@ const StyledFormContainer = styled.form`
     height: 50%;
   }
   .title {
-    /* take up 4 area */
     grid-area: 1 / 2 / span 1 / span 3;
   }
   .body {
     grid-area: 2 / 2 / span 4 / span 3;
-    /* take up 6l 4 h starting from row 2 */
   }
   .submit {
     grid-area: -1, -1;
@@ -82,11 +77,6 @@ const EditNoteModal = ({
   });
 
   // take in note title and body, prepopulate textarea and title with info.
-  // take note object & populate edit areas with note information
-
-  // will handle note update submit.
-
-  //! check noteToEdit -> for string | undefined and remove the undefined bit from it. noteToEdit.title should not be undefined, should be empty.
 
   useEffect(() => {
     if (noteToEdit === undefined) {
@@ -105,10 +95,6 @@ const EditNoteModal = ({
 
     setNoteState({ ...noteState, [name]: value });
   };
-
-  // if (!showModal) {
-  // return <></>;
-  // }
 
   // TODO turn this into a 6 line gridbox item
 
@@ -146,13 +132,7 @@ const EditNoteModal = ({
                 className='body'
                 autoComplete='off'
               />
-
-              <input
-                className='submit'
-                name='submit'
-                type='submit'
-                // onSubmit={noteState => handleEditNoteSubmit(noteState)}
-              />
+              <input className='submit' name='submit' type='submit' />
             </StyledFormContainer>
           </StyledModalBackground>
         </>

@@ -1,4 +1,3 @@
-// this is where authentication files will be made.
 import React, {
   useState,
   useEffect,
@@ -17,20 +16,15 @@ export const ProvideAuth = ({ children }: { children: ReactNode }) => {
 };
 
 export const useAuth = () => {
-  // console.count('useAuth call');
   return useContext(authContext);
 };
 
 function useProvideAuth() {
-  console.count('useProvideAuth');
   const [user, setUser] = useState<User | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // Wrap any Firebase methods we want to use making sure ...
-  // ... to save the user to state.
 
   const persistState = async (token: string) => {
-    console.count('persistState');
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -38,13 +32,12 @@ function useProvideAuth() {
     };
 
     const data: User = await axios.get('/api/users/login/token', config);
-    // console.log('userHereToken', data);
+
     setUser({ ...data, token });
   };
 
   // @desc fetches user from backend using email + string.
   const signin = async (email: string, password: string) => {
-    console.count('signIn');
     try {
       const config = {
         headers: {
@@ -59,12 +52,12 @@ function useProvideAuth() {
       localStorage.setItem('token', data.token);
       setUser(data);
     } catch (error) {
-      console.log(error);
+      console.error('error :)', error);
+      return { error };
     }
   };
 
   const signup = async (name: string, email: string, password: string) => {
-    console.count('signUp');
     setLoading(true);
     try {
       const config = {
@@ -81,7 +74,7 @@ function useProvideAuth() {
       setLoading(false);
       return user;
     } catch (err) {
-      console.log('ERR', err.response);
+      console.error('ERR', err.response);
       const errResponse =
         err.response && err.response.data.message
           ? err.response.data.message
@@ -91,46 +84,23 @@ function useProvideAuth() {
       setLoading(false);
       return { error, loading };
     }
-    // todo send email/password, create user, return newUser with jwt token
-    // ! endpoint: POST api/users/
   };
 
   const signout = () => {
-    console.count('signOut');
-
     setUser(undefined);
     localStorage.clear();
   };
 
-  // ! not part of mvp, implement later.
-  // const sendPasswordResetEmail = (email) => {
-  //   return firebase
-  //     .auth()
-  //     .sendPasswordResetEmail(email)
-  //     .then(() => {
-  //       return true;
-  //     });
-  // };
-  // const confirmPasswordReset = (code, password) => {
-  //   return firebase
-  //     .auth()
-  //     .confirmPasswordReset(code, password)
-  //     .then(() => {
-  //       return true;
-  //     });
-  // };
+  // ! not part of mvp, implement later. - password reset email
 
   const clearError = () => {
-    console.count('clear error');
     return setError(null);
   };
 
   useEffect(() => {
-    console.count('useAuth useEffect');
     if (localStorage.token && !user) {
       persistState(localStorage.token);
     }
-    // console.log('useAuth useEffect', user, error, loading);
   }, [user, error, loading]);
 
   return {
@@ -141,7 +111,5 @@ function useProvideAuth() {
     signup,
     signout,
     clearError,
-    // sendPasswordResetEmail,
-    // confirmPasswordReset,
   };
 }
