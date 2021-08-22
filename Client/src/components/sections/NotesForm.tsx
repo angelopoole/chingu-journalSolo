@@ -55,21 +55,34 @@ const NotesForm = ({
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (noteState.title.length > 30 || noteState.body.length > 260) {
+    const { title, body } = noteState;
+
+    if (title.length === 0 || body.length === 0) {
+      return setErrorState('please fill out form');
+    }
+
+    if (title.length > 30 || body.length > 260) {
       return setErrorState(
-        `Above character limit title:(${noteState.title.length} / 15) body:(${noteState.body.length} / 260)  `
+        `Above character limit title:(${title.length} / 15) body:(${body.length} / 260)  `
       );
     }
-    // e.preventDefault();
+
     const config = {
       headers: {
         Authorization: `Bearer ${auth.user?.token}`,
         'Content-Type': 'application/json',
       },
     };
-    const { data } = await axios.post('/api/notes', noteState, config);
-    // console.log(postedNote.data);
-    updateNotesArray(data);
+
+    try {
+      const { data } = await axios.post('/api/notes', noteState, config);
+      updateNotesArray(data);
+      console.log('data', data);
+    } catch (error) {
+      console.error('SORRY ' + error.message);
+      alert(error.message);
+    }
+
     setNoteState({ title: '', body: '' });
   };
 

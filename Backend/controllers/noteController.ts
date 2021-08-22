@@ -67,7 +67,23 @@ const updateNote = asyncHandler(async (req: RequestWithUser, res: Response) => {
     res.status(401);
     throw new Error('invalid user information');
   }
-  res.status(201).json('hit update note');
+
+  const note = await Note.findById(req.params.id);
+
+  if (note.user.toString() !== req.user._id.toString()) {
+    res.status(401);
+    throw new Error('You dont have permission to do that');
+  }
+
+  note.title = req.body.title;
+  note.body = req.body.body;
+
+  note.save();
+  console.log(`${note}`.green);
+  console.log(req.params, req.body);
+
+  res.status(201).json('Note saved');
+
   // payload should be the note id, body and title that we want to update note with
 });
 

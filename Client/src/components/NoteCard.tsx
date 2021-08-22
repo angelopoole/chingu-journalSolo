@@ -77,7 +77,7 @@ const NoteCard = ({
   handleSetNoteToEdit,
 }: {
   note: Note;
-  deleteNote: (noteId: number) => void;
+  deleteNote: (noteId: string) => void;
   toggleEditModal: () => void;
   handleSetNoteToEdit: (note: Note) => void;
 }) => {

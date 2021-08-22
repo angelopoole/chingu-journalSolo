@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from 'react';
+import React, { ChangeEvent, useState, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import { Note } from '../../interfaces/NoteTypes';
 
@@ -37,7 +37,7 @@ const StyledModalBackground = styled.div`
   }
 `;
 
-const StyledFormContainer = styled.div`
+const StyledFormContainer = styled.form`
   z-index: 1000;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -60,20 +60,25 @@ const StyledFormContainer = styled.div`
   }
 `;
 
+type EditNoteModalProps = {
+  showModal: boolean;
+  toggleEditModal: () => void;
+  noteToEdit: Note | undefined;
+  handleEditNoteSubmit: (
+    titlebody: { title: string; body: string },
+    e: FormEvent
+  ) => void;
+};
+
 const EditNoteModal = ({
   showModal,
   toggleEditModal,
   noteToEdit,
   handleEditNoteSubmit,
-}: {
-  showModal: boolean;
-  toggleEditModal: () => void;
-  noteToEdit: Note | undefined;
-  handleEditNoteSubmit: (note: Note) => void;
-}) => {
+}: EditNoteModalProps) => {
   const [noteState, setNoteState] = useState({
-    title: noteToEdit?.title,
-    body: noteToEdit?.body,
+    title: '',
+    body: '',
   });
 
   // take in note title and body, prepopulate textarea and title with info.
@@ -81,8 +86,14 @@ const EditNoteModal = ({
 
   // will handle note update submit.
 
+  //! check noteToEdit -> for string | undefined and remove the undefined bit from it. noteToEdit.title should not be undefined, should be empty.
+
   useEffect(() => {
-    setNoteState({ title: noteToEdit?.title, body: noteToEdit?.body });
+    if (noteToEdit === undefined) {
+      return;
+    } else {
+      setNoteState({ title: noteToEdit?.title, body: noteToEdit?.body });
+    }
   }, [noteToEdit]);
 
   const handleChange = (
@@ -95,51 +106,57 @@ const EditNoteModal = ({
     setNoteState({ ...noteState, [name]: value });
   };
 
-  if (!showModal) {
-    return <></>;
-  }
+  // if (!showModal) {
+  // return <></>;
+  // }
 
   // TODO turn this into a 6 line gridbox item
 
   return (
     <>
-      <ModalBackground onClick={() => toggleEditModal()} />
-      <StyledModalBackground>
-        <StyledFormContainer>
-          <label className='label'>
-            title:
-            <br />
-          </label>
-          <input
-            className='title'
-            value={noteState.title}
-            name='title'
-            type='text'
-            onChange={e => handleChange(e)}
-            autoComplete='off'
-          />
-          <br />
-          <label className='label'>
-            body:
-            <br />
-          </label>
-          <br />
-          <textarea
-            value={noteState.body}
-            name='body'
-            onChange={e => handleChange(e)}
-            className='body'
-            autoComplete='off'
-          />
+      {showModal && (
+        <>
+          <ModalBackground onClick={() => toggleEditModal()} />
+          <StyledModalBackground>
+            <StyledFormContainer
+              onSubmit={e => handleEditNoteSubmit(noteState, e)}
+            >
+              <label className='label'>
+                title:
+                <br />
+              </label>
+              <input
+                className='title'
+                value={noteState.title}
+                name='title'
+                type='text'
+                onChange={e => handleChange(e)}
+                autoComplete='off'
+              />
+              <br />
+              <label className='label'>
+                body:
+                <br />
+              </label>
+              <br />
+              <textarea
+                value={noteState.body}
+                name='body'
+                onChange={e => handleChange(e)}
+                className='body'
+                autoComplete='off'
+              />
 
-          <input
-            className='submit'
-            name='submit'
-            type='submit'
-            // onSubmit={noteState => handleEditNoteSubmit(noteState)}
-          />
-        </StyledFormContainer>
-      </StyledModalBackground>
+              <input
+                className='submit'
+                name='submit'
+                type='submit'
+                // onSubmit={noteState => handleEditNoteSubmit(noteState)}
+              />
+            </StyledFormContainer>
+          </StyledModalBackground>
+        </>
+      )}
     </>
   );
 };
