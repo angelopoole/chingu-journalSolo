@@ -34,21 +34,14 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/users', userRoutes);
 app.use('/api/notes', noteRoutes);
 
-app.get('/fileStats', (req, res) => {
-  try {
-    const stats = fs.statSync(path.resolve(__dirname + '/data'));
-    console.log(stats);
-    const statObject = {
-      isFile: stats.isFile().toString(),
-      isDirectory: stats.isDirectory().toString(),
-    };
+const __dirname = path.resolve();
 
-    res.send(statObject);
-  } catch (err) {
-    console.error(err);
-  }
-});
-
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/Client/build')));
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'Client', 'build', 'index.html'))
+  );
+}
 app.use(errorHandler);
 app.use(notFound);
 
