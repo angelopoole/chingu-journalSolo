@@ -12,7 +12,6 @@
     "dev---transpile": "ts-node-dev --respawn --transpileOnly ./backend/server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Client && npm run build --prefix Client && tsc --project ./ "
   },
-  "type": "module",
   "author": "Angelo Poole",
   "license": "MIT",
   "dependencies": {
