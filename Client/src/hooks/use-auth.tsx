@@ -31,8 +31,7 @@ function useProvideAuth() {
       },
     };
 
-    const data: User = await axios.get('/api/users/login/token', config);
-
+    const { data } = await axios.get('/api/users/login/token', config);
     setUser({ ...data, token });
   };
 

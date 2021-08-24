@@ -13,9 +13,9 @@ const ModalBackground = styled.div`
   z-index: 3;
 `;
 
-const StyledModalBackground = styled.div`
+const StyledFormBackground = styled.div`
   height: 50%;
-  width: 50%;
+  min-width: 50%;
   overflow: auto;
   margin: auto;
   position: absolute;
@@ -103,7 +103,7 @@ const EditNoteModal = ({
       {showModal && (
         <>
           <ModalBackground onClick={() => toggleEditModal()} />
-          <StyledModalBackground>
+          <StyledFormBackground>
             <StyledFormContainer
               onSubmit={e => handleEditNoteSubmit(noteState, e)}
             >
@@ -134,7 +134,7 @@ const EditNoteModal = ({
               />
               <input className='submit' name='submit' type='submit' />
             </StyledFormContainer>
-          </StyledModalBackground>
+          </StyledFormBackground>
         </>
       )}
     </>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, FormEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet-async';
 
 import { useAuth } from '../hooks/use-auth';
 
@@ -38,6 +39,8 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [userNotes, setUserNotes] = useState<Note[]>([]);
   const [noteToEdit, setNoteToEdit] = useState<Note | undefined>(undefined);
+
+  console.log(auth.user);
 
   useEffect(() => {
     if (auth.user) {
@@ -129,6 +132,9 @@ const HomePage = () => {
 
   return (
     <StyledContainer>
+      <Helmet>
+        <title>{auth.user.name}'s journal</title>
+      </Helmet>
       <EditNoteModal
         showModal={showModal}
         noteToEdit={noteToEdit}
