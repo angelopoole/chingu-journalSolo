@@ -10,7 +10,8 @@
     "dev-server": "concurrently \"npm run server\" \"npm run client\"",
     "prod": "tsc && node ./backend/build/app.js",
     "dev---transpile": "ts-node-dev --respawn --transpileOnly ./backend/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Client && npm run build --prefix Client && tsc --project ./ "
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Client && npm run build --prefix Client && tsc --project ./ ",
+    "installDeps": "npm install && npm install --prefix Client"
   },
   "author": "Angelo Poole",
   "license": "MIT",
