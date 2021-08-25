@@ -36,11 +36,52 @@ const StyledForm = styled.form`
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-  /* box-shadow: inset 0 0 5px 5px #beb69f; */
+
   margin: 0 0 3px 3px;
 
-  padding: 10% 20% 20% 20%;
+  padding: 10% 15% 10% 15%;
   background-color: blanchedalmond;
+
+  .input-group {
+    position: relative;
+    margin-bottom: 45px;
+
+    input {
+      font-size: 18px;
+      padding: 0.5em 0.5em 0.5em 0.5em;
+      min-width: 100%;
+      border: none;
+      border-bottom: 1px solid #757575;
+
+      :valid ~ label {
+        top: -20px;
+        font-size: 14px;
+        color: #5264ae;
+      }
+
+      &:focus {
+        outline: none;
+
+        ~ label,
+        &:valid ~ label {
+          top: -20px;
+          font-size: 14px;
+          color: #5264ae;
+        }
+      }
+    }
+
+    label {
+      color: #999;
+      font-size: 18px;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 5px;
+      top: 10px;
+      transition: 0.2s ease all;
+    }
+  }
 `;
 
 const AuthPage = (props: RouteComponentProps) => {
@@ -95,43 +136,42 @@ const AuthPage = (props: RouteComponentProps) => {
         <div className='login-message'>{formTypeParam} here</div>
         <StyledForm onSubmit={e => handleSubmit(e)} className='login-form'>
           {formTypeParam === 'signup' ? (
-            <label>
-              Name
+            <div className='input-group'>
               <input
-                placeholder='Name'
+                required
                 name='name'
                 type='text'
                 value={formInput.name}
                 onChange={event => handleFormChange(event)}
               />
-            </label>
+              <label>Name</label>
+            </div>
           ) : null}
-          <label>
-            Email
+          <div className='input-group'>
             <input
-              placeholder='Email'
+              required
               name='email'
               type='text'
               value={formInput.email}
               onChange={event => handleFormChange(event)}
             />
-          </label>
+            <label>Email</label>
+          </div>
 
-          <label>
-            Password:
+          <div className='input-group'>
             <input
-              placeholder='Password'
+              required
               name='password'
               type='password'
               value={formInput.password}
               onChange={event => handleFormChange(event)}
             />
-          </label>
-
-          <label>
-            Submit:
+            <label>Password:</label>
+          </div>
+          <div className='submit-group'>
+            <label>Submit:</label>
             <input name='submit' type='submit' />
-          </label>
+          </div>
         </StyledForm>
       </StyledLoginMessage>
     </>
