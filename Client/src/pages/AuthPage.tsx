@@ -12,27 +12,35 @@ interface FormInput {
 }
 
 const StyledLoginMessage = styled.div`
-  min-height: 90vh;
-  background-color: var(--dark-shades);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  min-height: 100vh;
   width: 100%;
 
-  .login-form {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    margin: auto;
-    padding: 10% 20% 20% 20%;
-    background-color: blanchedalmond;
-    height: 100vh;
-  }
+  background-color: #beb69f;
 
   .login-message {
-    text-align: center;
-    margin: auto;
-    background-color: inherit;
-
-    height: 0px;
+    display: inline;
+    margin-top: 2em;
+    margin-bottom: 8em;
   }
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-flow: column;
+
+  border-radius: 10% / 50%;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  /* box-shadow: inset 0 0 5px 5px #beb69f; */
+  margin: 0 0 3px 3px;
+
+  padding: 10% 20% 20% 20%;
+  background-color: blanchedalmond;
 `;
 
 const AuthPage = (props: RouteComponentProps) => {
@@ -85,11 +93,12 @@ const AuthPage = (props: RouteComponentProps) => {
     <>
       <StyledLoginMessage>
         <div className='login-message'>{formTypeParam} here</div>
-        <form onSubmit={e => handleSubmit(e)} className='login-form'>
+        <StyledForm onSubmit={e => handleSubmit(e)} className='login-form'>
           {formTypeParam === 'signup' ? (
             <label>
-              Name:
+              Name
               <input
+                placeholder='Name'
                 name='name'
                 type='text'
                 value={formInput.name}
@@ -98,8 +107,9 @@ const AuthPage = (props: RouteComponentProps) => {
             </label>
           ) : null}
           <label>
-            Email/Username:
+            Email
             <input
+              placeholder='Email'
               name='email'
               type='text'
               value={formInput.email}
@@ -110,6 +120,7 @@ const AuthPage = (props: RouteComponentProps) => {
           <label>
             Password:
             <input
+              placeholder='Password'
               name='password'
               type='password'
               value={formInput.password}
@@ -121,7 +132,7 @@ const AuthPage = (props: RouteComponentProps) => {
             Submit:
             <input name='submit' type='submit' />
           </label>
-        </form>
+        </StyledForm>
       </StyledLoginMessage>
     </>
   );

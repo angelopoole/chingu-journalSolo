@@ -4,9 +4,7 @@ import NavBar from './NavBar';
 import Footer from './sections/Footer';
 
 const StyledMainContent = styled.main`
-  display: flex;
-  min-width: 100%;
-  flex-flow: column;
+  min-height: 100%;
 `;
 
 const Layout = ({ children }: { children: React.ReactNode }) => {

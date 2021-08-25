@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
 
   html {
   box-sizing: border-box;
-  width: 100%;
+  height: 100%;
   
 }
 *,*:before, *:after {
@@ -24,22 +24,31 @@ const GlobalStyles = createGlobalStyle`
 
 body{
   margin: 0 auto;
+  height: 100%;
+}
 
+#root{
+height: 100%;
 }
 
 .App{
-  
+height: 100%;
 }
 
 main {
-  min-height: 100%;
   margin: 0 auto;
-  height: 100%;
   width: 100%;
 }
 
 section{
   position: relative;
+}
+
+button{
+  background: none;
+    border: none;
+    font-size: inherit;
+    
 }
 
 

@@ -18,12 +18,8 @@ const StyledLink = styled(Link)`
 const StyledUl = styled.ul`
   display: flex;
   padding: 0;
-  min-width: 100%;
+  /* min-width: 100%; */
   margin: 0px 0.5rem 0px 0.5rem;
-
-  .sign-out {
-    all: unset;
-  }
 
   .nav-button {
     display: inline-block;
@@ -34,8 +30,11 @@ const StyledUl = styled.ul`
     transition-property: transform;
     transform-origin: 0 100%;
 
+    height: 100%;
+    /* width: 100%; */
+
     cursor: pointer;
-    padding: 1.2rem;
+    padding: 1rem;
     :hover {
       background-color: var(--dark-accent);
       transition: var(--transition);
@@ -46,6 +45,9 @@ const StyledUl = styled.ul`
   li.align-left {
     margin-left: auto;
     margin-right: 0.5rem;
+  }
+  .sign-out {
+    font-family: inherit;
   }
 `;
 const NavBar = () => {
