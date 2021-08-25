@@ -8,7 +8,7 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = () => {
-  return <StyledFooter>© 2021 Angelo poole</StyledFooter>;
+  return <StyledFooter>© 2021 Angelo Poole</StyledFooter>;
 };
 
 export default Footer;
