@@ -1,7 +1,6 @@
 import express from 'express';
 
 import colors from 'colors';
-import fs from 'fs';
 import path from 'path';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
