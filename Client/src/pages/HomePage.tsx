@@ -40,8 +40,6 @@ const HomePage = () => {
   const [userNotes, setUserNotes] = useState<Note[]>([]);
   const [noteToEdit, setNoteToEdit] = useState<Note | undefined>(undefined);
 
-  console.log(auth.user);
-
   useEffect(() => {
     if (auth.user) {
       fetchPosts(auth.user.token);
