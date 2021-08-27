@@ -10,6 +10,8 @@
 
 # Chingu Journal
 
+![project image](../static-media/Screen%20Shot%202021-08-27%20at%2012.52.10%20PM.png?raw=true)
+
 ## overveiw
 
 chingu journal is a simple crud applciation with both a frontend and backend.
