@@ -72,7 +72,7 @@ function useProvideAuth() {
       setUser(data);
       setLoading(false);
       return user;
-    } catch (err) {
+    } catch (err: any) {
       console.error('ERR', err.response);
       const errResponse =
         err.response && err.response.data.message

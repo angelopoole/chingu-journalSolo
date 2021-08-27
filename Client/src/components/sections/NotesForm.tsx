@@ -79,8 +79,10 @@ const NotesForm = ({
       const { data } = await axios.post('/api/notes', noteState, config);
       updateNotesArray(data);
     } catch (error) {
-      console.error('SORRY ' + error.message);
-      alert(error.message);
+      if (error instanceof Error) {
+        console.error('SORRY ' + error.message);
+        alert(error.message);
+      }
     }
 
     setNoteState({ title: '', body: '' });
