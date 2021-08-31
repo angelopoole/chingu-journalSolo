@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Note } from '../interfaces/NoteTypes';
+import { Edit, XSquare } from '@styled-icons/feather';
 
 // TODO, fix how cards are created, instead go with a 4 area grid so that the outer card controlls the coloring on hover.
 // TODO, onclick notes should open into modal.
@@ -58,6 +59,7 @@ const StyledBody = styled.div`
 
 const StyledflexButtons = styled.div`
   display: flex;
+  flex-flow: row-reverse;
 `;
 
 const StyledToolBar = styled.div`
@@ -65,6 +67,7 @@ const StyledToolBar = styled.div`
 
   button {
     /* min-height: 2em; */
+    bottom: 0px;
   }
 
   button:hover {
@@ -114,9 +117,11 @@ const NoteCard = ({
         <StyledflexButtons id=' 3 interactionIcons -Flex'>
           <StyledToolBar>
             <button onClick={() => handleModalAndSetEditNote(note)}>
-              edit
+              <Edit size='24' />
             </button>
-            <button onClick={() => deleteNote(_id)}>delete</button>
+            <button onClick={() => deleteNote(_id)}>
+              <XSquare size='24' />
+            </button>
           </StyledToolBar>
         </StyledflexButtons>
       </StyledCard>
