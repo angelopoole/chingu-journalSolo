@@ -62,7 +62,7 @@ const NotesForm = ({
       return setErrorState('please fill out form');
     }
 
-    if (title.length > 30 || body.length > 260) {
+    if (title.length > 50 || body.length > 1000) {
       return setErrorState(
         `Above character limit title:(${title.length} / 15) body:(${body.length} / 260)  `
       );

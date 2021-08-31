@@ -11,7 +11,10 @@ import { Note } from '../interfaces/NoteTypes';
 
 const StyledCardContainer = styled.div`
   margin: 10px;
+  width: 95%;
   background-color: var(--light-shades);
+
+  overflow-wrap: break-word;
 
   button {
     transition: ease-in 0.2s;
@@ -32,8 +35,7 @@ const StyledCard = styled.div`
 `;
 
 const StyledContentContainer = styled.div`
-  padding: 5px;
-  display: flex;
+  padding: 5px 16px 0px;
   min-height: 85%;
 `;
 
@@ -41,13 +43,24 @@ const StyledContent = styled.div`
   min-height: 60px;
 `;
 
-const StyledTitle = styled.div``;
+const StyledTitle = styled.div`
+  font-size: 1.2em;
+`;
 
-const StyledBodyContainer = styled.div``;
+const StyledBodyContainer = styled.div`
+  padding-top: 0.5em;
+`;
 
-const StyledBody = styled.div``;
+const StyledBody = styled.div`
+  /* display: inline-block; */
+  min-height: 30px;
+`;
 
 const StyledflexButtons = styled.div`
+  display: flex;
+`;
+
+const StyledToolBar = styled.div`
   display: flex;
 
   button {
@@ -58,6 +71,11 @@ const StyledflexButtons = styled.div`
     cursor: pointer;
     background-color: var(--light-accent);
   }
+`;
+
+const StyledHorizontalRule = styled.hr`
+  margin: 0em;
+  border-radius: 5px;
 `;
 
 const NoteCard = ({
@@ -78,50 +96,32 @@ const NoteCard = ({
     toggleEditModal();
   };
 
+  let titleText = title.length > 25 ? title.slice(0, 25) + '\u2026' : title;
+  let bodyText = body.length > 200 ? body.slice(0, 200) + '\u2026' : body;
+
   return (
     <StyledCardContainer id='1 CardContainer'>
       <StyledCard id=' 2 Card'>
         <StyledContentContainer id=' 3 Info and flexdecision container'>
           <StyledContent id='4 titleBodyContent'>
-            <StyledTitle id='title'>{title}</StyledTitle>
+            <StyledTitle id='title'>{titleText || 'title'}</StyledTitle>
+            <StyledHorizontalRule />
             <StyledBodyContainer id='bodyContiner'>
-              <StyledBody id='body'>{body}</StyledBody>
+              <StyledBody id='body'>{bodyText || 'Write a note...'}</StyledBody>
             </StyledBodyContainer>
           </StyledContent>
         </StyledContentContainer>
         <StyledflexButtons id=' 3 interactionIcons -Flex'>
-          <button onClick={() => handleModalAndSetEditNote(note)}>edit</button>
-          <button onClick={() => deleteNote(_id)}>delete</button>
+          <StyledToolBar>
+            <button onClick={() => handleModalAndSetEditNote(note)}>
+              edit
+            </button>
+            <button onClick={() => deleteNote(_id)}>delete</button>
+          </StyledToolBar>
         </StyledflexButtons>
       </StyledCard>
     </StyledCardContainer>
   );
-
-  // return (
-  //   <StyledOuterCard>
-  //     <StyledContent>
-  //       <h3 className='title'>{title}</h3>
-  //       <p className='body'>{body}</p>
-  //     </StyledContent>
-  //     <StyledButtonContainer className='button-container'>
-  //       <button onClick={() => handleModalAndSetEditNote(note)}>edit</button>
-  //       <button onClick={() => deleteNote(_id)}>delete</button>
-  //     </StyledButtonContainer>
-  //   </StyledOuterCard>
-  // );
 };
 
 export default NoteCard;
-
-{
-  /* <StyledOuterCard>
-<StyledContent>
-  <h3 className='title'>{title}</h3>
-  <p className='body'>{body}</p>
-</StyledContent>
-<StyledButtonContainer className='button-container'>
-  <button onClick={() => handleModalAndSetEditNote(note)}>edit</button>
-  <button onClick={() => deleteNote(_id)}>delete</button>
-</StyledButtonContainer>
-</StyledOuterCard> */
-}

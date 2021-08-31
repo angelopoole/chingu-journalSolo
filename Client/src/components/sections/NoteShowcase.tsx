@@ -14,6 +14,9 @@ const StyledNoteSection = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
   grid-auto-rows: minmax(10em, 1fr);
+  > {
+    word-wrap: break-word;
+  }
 `;
 
 const NoteShowcase = (props: Props) => {
