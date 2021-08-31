@@ -65,6 +65,11 @@ const StyledButtonContainer = styled.div`
   }
 `;
 
+// TODO, onclick notes should open into modal.
+// TODO, edit and delete should be done inside modal
+// TODO, edits done inside of the modal should be sent to the backed after a typing delay, 5000ms
+// TODO, remove edit and delete buttons from card.
+
 const NoteCard = ({
   note,
   deleteNote,
