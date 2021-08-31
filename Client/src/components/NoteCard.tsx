@@ -12,6 +12,17 @@ import { Note } from '../interfaces/NoteTypes';
 const StyledCardContainer = styled.div`
   margin: 10px;
   background-color: var(--light-shades);
+
+  button {
+    transition: ease-in 0.2s;
+    color: transparent;
+  }
+
+  :hover {
+    button {
+      color: black;
+    }
+  }
 `;
 
 const StyledCard = styled.div`
@@ -23,7 +34,7 @@ const StyledCard = styled.div`
 const StyledContentContainer = styled.div`
   padding: 5px;
   display: flex;
-  height: 85%;
+  min-height: 85%;
 `;
 
 const StyledContent = styled.div`
@@ -38,6 +49,15 @@ const StyledBody = styled.div``;
 
 const StyledflexButtons = styled.div`
   display: flex;
+
+  button {
+    /* min-height: 2em; */
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: var(--light-accent);
+  }
 `;
 
 const NoteCard = ({
