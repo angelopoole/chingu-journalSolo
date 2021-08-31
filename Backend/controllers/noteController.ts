@@ -16,7 +16,6 @@ import { RequestWithUser } from '../interfaces/authInterface';
 //  @access private
 const createNote = asyncHandler(async (req: RequestWithUser, res: Response) => {
   const { title, body } = req.body;
-
   const note = new Note({
     title,
     body,
