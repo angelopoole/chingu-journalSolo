@@ -10,7 +10,12 @@ type Props = {
   handleSetNoteToEdit: (note: Note) => void;
 };
 
-const StyledNoteSection = styled.section`
+const SectionWrapper = styled.section`
+  max-width: 1270px;
+  margin: 0 auto;
+`;
+
+const StyledNoteSection = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
   grid-auto-rows: minmax(10em, 1fr);
@@ -34,7 +39,11 @@ const NoteShowcase = (props: Props) => {
     );
   });
 
-  return <StyledNoteSection>{mappedNotes}</StyledNoteSection>;
+  return (
+    <SectionWrapper>
+      <StyledNoteSection>{mappedNotes}</StyledNoteSection>
+    </SectionWrapper>
+  );
 };
 
 export default NoteShowcase;

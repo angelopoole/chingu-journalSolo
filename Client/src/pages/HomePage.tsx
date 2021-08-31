@@ -17,14 +17,6 @@ const StyledContainer = styled.div`
   min-height: 90vh;
   min-width: 100%;
 
-  background-image: radial-gradient(
-      var(--light-accent) 0.8px,
-      transparent 0.8px
-    ),
-    radial-gradient(#f2f2f2 0.8px, #f2f2f2 0.8px);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
-
   .login-message {
     text-align: center;
     margin: auto;
