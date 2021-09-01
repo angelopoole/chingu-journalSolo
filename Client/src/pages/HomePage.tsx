@@ -7,22 +7,26 @@ import { useAuth } from '../hooks/use-auth';
 
 import NotesForm from '../components/sections/NotesForm';
 import NoteShowcase from '../components/sections/NoteShowcase';
+import Background from '../images/HomepageBackground.svg';
 
 import { Note } from '../interfaces/NoteTypes';
 import EditNoteModal from '../components/sections/EditNoteModal';
 
 // @desc this pace is protected, will only show notes if user is logged in.
 
+const StyledLoginContainer = styled.div`
+  height: 100%;
+`;
+
 const StyledContainer = styled.div`
-  min-height: 90vh;
-  min-width: 100%;
+  /* height: 100%; */
 
   .login-message {
     text-align: center;
-    margin: auto;
-    padding: 20%;
-    background-color: blanchedalmond;
-    height: 100vh;
+  }
+
+  .bg-svg {
+    background: url(${Background}) no-repeat;
   }
 `;
 
@@ -52,9 +56,13 @@ const HomePage = () => {
 
   if (!auth?.user) {
     return (
-      <StyledContainer>
-        <div className='login-message'> please login!</div>
-      </StyledContainer>
+      <StyledLoginContainer id='terr'>
+        <StyledContainer>
+          <div className='bg-svg'>
+            <div className='login-message'> please login!</div>
+          </div>
+        </StyledContainer>
+      </StyledLoginContainer>
     );
   }
 
