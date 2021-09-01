@@ -103,38 +103,21 @@ const EditNoteModal = ({
       {showModal && (
         <>
           <ModalBackground onClick={() => toggleEditModal()} />
-          <StyledFormBackground>
-            <StyledFormContainer
-              onSubmit={e => handleEditNoteSubmit(noteState, e)}
-            >
-              <label className='label'>
-                title:
-                <br />
-              </label>
-              <input
-                className='title'
-                value={noteState.title}
-                name='title'
-                type='text'
-                onChange={e => handleChange(e)}
-                autoComplete='off'
-              />
-              <br />
-              <label className='label'>
-                body:
-                <br />
-              </label>
-              <br />
-              <textarea
-                value={noteState.body}
-                name='body'
-                onChange={e => handleChange(e)}
-                className='body'
-                autoComplete='off'
-              />
-              <input className='submit' name='submit' type='submit' />
-            </StyledFormContainer>
-          </StyledFormBackground>
+          <div id='modal-container'>
+            <div id='modal'>
+              <div id='info-and-content-container'>
+                <div id='content'>
+                  <div id='title'></div>
+                  <div id='body'></div>
+                  <div id='edit-date'></div>
+                </div>
+                <div id='toolbar'>
+                  <div id='flex-toolbar'></div>
+                  <button id='close-button'>close</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>
@@ -142,3 +125,36 @@ const EditNoteModal = ({
 };
 
 export default EditNoteModal;
+
+// <StyledFormBackground>
+// <StyledFormContainer
+//   onSubmit={e => handleEditNoteSubmit(noteState, e)}
+// >
+//   <label className='label'>
+//     title:
+//     <br />
+//   </label>
+//   <input
+//     className='title'
+//     value={noteState.title}
+//     name='title'
+//     type='text'
+//     onChange={e => handleChange(e)}
+//     autoComplete='off'
+//   />
+//   <br />
+//   <label className='label'>
+//     body:
+//     <br />
+//   </label>
+//   <br />
+//   <textarea
+//     value={noteState.body}
+//     name='body'
+//     onChange={e => handleChange(e)}
+//     className='body'
+//     autoComplete='off'
+//   />
+//   <input className='submit' name='submit' type='submit' />
+// </StyledFormContainer>
+// </StyledFormBackground>
