@@ -2,6 +2,11 @@ import React, { ChangeEvent, useState, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import { Note } from '../../interfaces/NoteTypes';
 
+// TODO: GET MODAL FUNCTIONAL AGAIN
+// TODO: HAVE MODAL BE RESPONSIVE
+// TODO: GET USEONCLICKOUTSIDE WORKING
+// TODO: REFACTOR HOW TOGGLE MODAL WORKS
+
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
