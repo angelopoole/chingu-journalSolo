@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Note } from '../interfaces/NoteTypes';
-import { Edit, XSquare } from '@styled-icons/feather';
+import { Edit, X } from '@styled-icons/feather';
 
-// TODO, fix how cards are created, instead go with a 4 area grid so that the outer card controlls the coloring on hover.
 // TODO, onclick notes should open into modal.
 // TODO, edit and delete should be done inside modal
 // TODO, edits done inside of the modal should be sent to the backed after a typing delay, 5000ms
 // TODO, remove edit and delete buttons from card.
-// TODO, stop card overflow, this causes responsiveness breaks.
+// TODO, allow user to change the color of their note and save it to the note database.
 
 const StyledCardContainer = styled.div`
   margin: 10px;
   width: 95%;
-  background-color: var(--light-shades);
+
+  background-color: ${props => props.color || 'var(--light-shades)'};
 
   overflow-wrap: break-word;
 
@@ -53,7 +53,6 @@ const StyledBodyContainer = styled.div`
 `;
 
 const StyledBody = styled.div`
-  /* display: inline-block; */
   min-height: 30px;
 `;
 
@@ -66,13 +65,15 @@ const StyledToolBar = styled.div`
   display: flex;
 
   button {
-    /* min-height: 2em; */
-    bottom: 0px;
+    border-radius: 50%;
   }
 
   button:hover {
     cursor: pointer;
-    background-color: var(--light-accent);
+
+    .toolbar-svg {
+      color: var(--light-accent);
+    }
   }
 `;
 
@@ -93,7 +94,6 @@ const NoteCard = ({
   handleSetNoteToEdit: (note: Note) => void;
 }) => {
   const { _id, body, title } = note;
-
   const handleModalAndSetEditNote = (note: Note) => {
     handleSetNoteToEdit(note);
     toggleEditModal();
@@ -117,10 +117,10 @@ const NoteCard = ({
         <StyledflexButtons id=' 3 interactionIcons -Flex'>
           <StyledToolBar>
             <button onClick={() => handleModalAndSetEditNote(note)}>
-              <Edit size='24' />
+              <Edit size='24' className='toolbar-svg' />
             </button>
             <button onClick={() => deleteNote(_id)}>
-              <XSquare size='24' />
+              <X size='24' className='toolbar-svg' />
             </button>
           </StyledToolBar>
         </StyledflexButtons>
