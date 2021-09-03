@@ -117,6 +117,10 @@ const AuthPage = (props: RouteComponentProps) => {
     }
     if (formTypeParam === 'signup') {
       const { name, email, password } = formInput;
+      if (!email.includes('@')) {
+        alert('please enter a valid email');
+        return;
+      }
       await auth?.signup(name, email, password);
     }
     SetFormInput({ name: '', email: '', password: '' });

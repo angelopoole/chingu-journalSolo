@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useAuth } from '../hooks/use-auth';
+
 import SubtlePrism from '../images/SubtlePrism.svg';
 
 const TopOfHomeLandingPage = styled.div`
@@ -26,11 +28,18 @@ const StyledContainer = styled.div`
 `;
 
 const LandingPage = () => {
+  const auth = useAuth();
+
+  let userGreeting = auth.user?.name
+    ? `How's it going ${auth.user?.name}`
+    : `please login!`;
+
   return (
     <TopOfHomeLandingPage id='terr'>
       <StyledContainer>
         <h1>
-          Hello! welcome to chingu journal! <br /> please login!
+          Hello! Welcome to chingu journal! <br />
+          {userGreeting || `please login!`}
         </h1>
       </StyledContainer>
     </TopOfHomeLandingPage>
