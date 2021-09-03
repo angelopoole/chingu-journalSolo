@@ -11,7 +11,7 @@ type Props = {
 };
 
 const SectionWrapper = styled.section`
-  min-height: 40em;
+  min-height: 50em;
   max-width: 1270px;
   margin: 0 auto;
 `;

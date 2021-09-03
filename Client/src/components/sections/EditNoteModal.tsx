@@ -113,9 +113,7 @@ const EditNoteModal = ({
   }, [noteToEdit]);
 
   useEffect(() => {
-    console.log(noteState);
     const handleSubmissionDebounce = setTimeout(() => {
-      console.log('debounce');
       handleEditNoteSubmit(noteState);
     }, 400);
 
