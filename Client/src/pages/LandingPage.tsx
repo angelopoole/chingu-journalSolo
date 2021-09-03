@@ -18,12 +18,11 @@ const TopOfHomeLandingPage = styled.div`
 const StyledContainer = styled.div`
   padding: 10em 5em;
   background-color: var(--light-accent);
-  /* opacity: 0.5; */
+  max-width: 1270px;
+  align-self: center;
+
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
-  h1 {
-    /* opacity: 0.4; */
-  }
 `;
 
 const LandingPage = () => {
