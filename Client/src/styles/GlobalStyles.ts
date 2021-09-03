@@ -16,47 +16,43 @@ const GlobalStyles = createGlobalStyle`
 
 
   html {
-  box-sizing: border-box;
-  height: 100%;
-  
-}
-*,*:before, *:after {
-  box-sizing: inherit;
-}
+    box-sizing: border-box;
+    height: 100%;
+  }
 
-body{
+  *,*:before, *:after {
+    box-sizing: inherit;
+  }
 
-  margin: 0 auto;
-  /* height: 100%; */
-  min-height: 100%;
-
-    
+  body{
+    overflow-x: hidden;
+    margin: 0 auto;
+    min-height: 100%;
     max-width: 1920px;
     margin: 0 auto;
-}
+  }
 
-#root{
-  height: 100%;
-}
+  #root{
+    height: 100%;
+  }
 
-.App{
-height: 100%;
-}
+  .App{
+    height: 100%;
+  }
 
-main {
-  margin: 0 auto;
-  width: 100%;
-}
+  main {
+    margin: 0 auto;
+    width: 100%;
+  }
 
-section{
-  position: relative;
-}
+  section{
+    position: relative;
+  }
 
-button{
-  background: none;
+  button{
+    background: none;
     border: none;
     font-size: inherit;
-    
 }
 
 

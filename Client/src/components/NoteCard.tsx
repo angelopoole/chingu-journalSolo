@@ -103,7 +103,10 @@ const NoteCard = ({
   let bodyText = body.length > 200 ? body.slice(0, 200) + '\u2026' : body;
 
   return (
-    <StyledCardContainer id='1 CardContainer'>
+    <StyledCardContainer
+      id='1 CardContainer'
+      onClick={() => handleModalAndSetEditNote(note)}
+    >
       <StyledCard id=' 2 Card'>
         <StyledContentContainer id=' 3 Info and flexdecision container'>
           <StyledContent id='4 titleBodyContent'>

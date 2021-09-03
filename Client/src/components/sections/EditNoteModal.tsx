@@ -18,48 +18,7 @@ const ModalBackground = styled.div`
   z-index: 3;
 `;
 
-const StyledFormBackground = styled.div`
-  height: 50%;
-  min-width: 50%;
-  overflow: auto;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: var(--main-brand-color);
-
-  position: fixed;
-  z-index: 999;
-
-  .Absolute-Center.is-Variable {
-    display: table;
-    height: auto;
-  }
-`;
-
-const StyledFormContainer = styled.form`
-  z-index: 1000;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(6, 3rem);
-
-  .label {
-    text-align: center;
-    height: 50%;
-  }
-  .title {
-    grid-area: 1 / 2 / span 1 / span 3;
-  }
-  .body {
-    grid-area: 2 / 2 / span 4 / span 3;
-  }
-  .submit {
-    grid-area: -1, -1;
-  }
-`;
-
+// test typings inside of react comp :-)
 type EditNoteModalProps = {
   showModal: boolean;
   toggleEditModal: () => void;
@@ -118,7 +77,7 @@ const EditNoteModal = ({
                 </div>
                 <div id='toolbar'>
                   <div id='flex-toolbar'></div>
-                  <button id='close-button'>close</button>
+                  <button id='close-button'></button>
                 </div>
               </div>
             </div>
