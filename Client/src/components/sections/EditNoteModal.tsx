@@ -2,6 +2,8 @@ import React, { ChangeEvent, useState, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import { Note } from '../../interfaces/NoteTypes';
 
+import { Edit, X } from '@styled-icons/feather';
+
 // TODO: GET MODAL FUNCTIONAL AGAIN
 // TODO: HAVE MODAL BE RESPONSIVE
 // TODO: GET USEONCLICKOUTSIDE WORKING
@@ -14,8 +16,68 @@ const ModalBackground = styled.div`
   bottom: 0;
   right: 0;
 
+  /* background-color: red; */
   background: rgba(0, 0, 0, 0.5);
-  z-index: 3;
+  z-index: 5;
+`;
+
+const StyledEditModalContainer = styled.div`
+  position: fixed;
+  left: 20%;
+  top: 12em;
+
+  padding: 1em;
+  background-color: transparent;
+
+  z-index: 200;
+`;
+
+const StyledModal = styled.div`
+  width: 37.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 60%), 0 4px 8px 3px rgb(0 0 0 / 30%);
+`;
+
+const StyledInfoAndContentContainer = styled.div`
+  background-color: var(--light-shades);
+  border: solid var(--light-accent);
+  border-radius: inherit;
+`;
+
+const StyledToolbarContainer = styled.div`
+  display: flex;
+
+  #close-button {
+  }
+`;
+const StyledToolbar = styled.div`
+  display: flex;
+`;
+
+const ContentContainer = styled.div``;
+
+const StyledTitle = styled.input`
+  width: 100%;
+  border: none;
+  background-color: inherit;
+  outline: none;
+`;
+
+const StyledBody = styled.textarea`
+  width: 100%;
+  border: none;
+  background-color: inherit;
+
+  resize: none;
+  width: 100%;
+  min-height: 100px;
+  padding: 5px;
+  overflow: hidden;
+  box-sizing: border-box;
+  outline: none;
+  &:focus {
+    border: none;
+  }
 `;
 
 // test typings inside of react comp :-)
@@ -60,28 +122,49 @@ const EditNoteModal = ({
     setNoteState({ ...noteState, [name]: value });
   };
 
-  // TODO turn this into a 6 line gridbox item
+  let dateNow = new Date();
+
+  let shownDate = dateNow.toString().slice(0, 10);
+
+  // https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ <- imlpiment
 
   return (
     <>
       {showModal && (
         <>
           <ModalBackground onClick={() => toggleEditModal()} />
-          <div id='modal-container'>
-            <div id='modal'>
-              <div id='info-and-content-container'>
-                <div id='content'>
-                  <div id='title'></div>
-                  <div id='body'></div>
-                  <div id='edit-date'></div>
-                </div>
-                <div id='toolbar'>
-                  <div id='flex-toolbar'></div>
+          <StyledEditModalContainer id='modal-container'>
+            <StyledModal id='modal'>
+              <StyledInfoAndContentContainer id='info-and-content-container'>
+                <ContentContainer id='content'>
+                  <StyledTitle
+                    value={noteState.title}
+                    name='title'
+                    type='text'
+                    onChange={e => handleChange(e)}
+                    autoComplete='off'
+                  />
+                  <StyledBody
+                    value={noteState.body}
+                    name='body'
+                    onChange={e => handleChange(e)}
+                    autoComplete='off'
+                  />
+                  <br />
+                  <div id='edit-date'>{shownDate}</div>
+                </ContentContainer>
+                <StyledToolbarContainer id='toolbar'>
+                  <StyledToolbar id='flex-toolbar'>
+                    <button>
+                      Delete Note
+                      <X size='24' className='toolbar-svg' />
+                    </button>
+                  </StyledToolbar>
                   <button id='close-button'></button>
-                </div>
-              </div>
-            </div>
-          </div>
+                </StyledToolbarContainer>
+              </StyledInfoAndContentContainer>
+            </StyledModal>
+          </StyledEditModalContainer>
         </>
       )}
     </>
