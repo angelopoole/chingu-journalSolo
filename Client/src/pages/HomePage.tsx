@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FormEvent } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
@@ -13,10 +13,6 @@ import { Note } from '../interfaces/NoteTypes';
 import EditNoteModal from '../components/sections/EditNoteModal';
 
 // @desc this pace is protected, will only show notes if user is logged in.
-
-const StyledLoginContainer = styled.div`
-  height: 100%;
-`;
 
 const StyledContainer = styled.div`
   .login-message {
@@ -40,6 +36,39 @@ const HomePage = () => {
       setUserNotes([]);
     }
   }, [auth.user]);
+
+  const handleEditNoteSubmit = useCallback(
+    () => async (titleBody: { title: string; body: string }) => {
+      if (!noteToEdit) {
+        return;
+      }
+
+      const { _id, user } = noteToEdit;
+      const updatedNote = { _id, user, ...titleBody };
+
+      const filteredNote = userNotes.filter(note => {
+        if (note._id === updatedNote._id) {
+          note.body = updatedNote.body;
+          note.title = updatedNote.title;
+        }
+        return note;
+      });
+
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${auth.user?.token}`,
+          },
+        };
+        await axios.put(`/api/notes/${_id}`, titleBody, config);
+      } catch (error) {
+        console.error(error);
+      }
+
+      setUserNotes(filteredNote);
+    },
+    [auth.user?.token, noteToEdit, userNotes]
+  );
 
   if (!auth?.user) {
     return <Redirect to='/' />;
@@ -73,48 +102,13 @@ const HomePage = () => {
 
   const toggleEditModal = () => {
     setShowModal(!showModal);
+    if (noteToEdit) {
+      setNoteToEdit(undefined);
+    }
   };
 
   const handleSetNoteToEdit = (selectedNote: Note) => {
     setNoteToEdit(selectedNote);
-  };
-
-  const handleEditNoteSubmit = async (
-    titleBody: { title: string; body: string },
-    e: FormEvent
-  ) => {
-    e.preventDefault();
-
-    if (!noteToEdit) {
-      return alert('Error! no note selected');
-    }
-
-    const { _id, user } = noteToEdit;
-    const updatedNote = { _id, user, ...titleBody };
-
-    const filteredNote = userNotes.filter(note => {
-      if (note._id === updatedNote._id) {
-        note.body = updatedNote.body;
-        note.title = updatedNote.title;
-      }
-      return note;
-    });
-
-    toggleEditModal();
-
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${auth.user?.token}`,
-        },
-      };
-      await axios.put(`/api/notes/${_id}`, titleBody, config);
-    } catch (error) {
-      console.error(error);
-    }
-
-    setUserNotes(filteredNote);
-    setNoteToEdit(undefined);
   };
 
   return (

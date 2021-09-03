@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState, useEffect, FormEvent } from 'react';
+import React, { ChangeEvent, useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Note } from '../../interfaces/NoteTypes';
 
-import { Edit, X } from '@styled-icons/feather';
+import { X } from '@styled-icons/feather';
 
 // TODO: GET MODAL FUNCTIONAL AGAIN
 // TODO: HAVE MODAL BE RESPONSIVE
@@ -52,6 +52,7 @@ const StyledToolbarContainer = styled.div`
 `;
 const StyledToolbar = styled.div`
   display: flex;
+  flex-flow: row-reverse;
 `;
 
 const ContentContainer = styled.div``;
@@ -85,10 +86,7 @@ type EditNoteModalProps = {
   showModal: boolean;
   toggleEditModal: () => void;
   noteToEdit: Note | undefined;
-  handleEditNoteSubmit: (
-    titlebody: { title: string; body: string },
-    e: FormEvent
-  ) => void;
+  handleEditNoteSubmit: (titlebody: { title: string; body: string }) => void;
 };
 
 const EditNoteModal = ({
@@ -104,6 +102,8 @@ const EditNoteModal = ({
 
   // take in note title and body, prepopulate textarea and title with info.
 
+  // run handleEditNoteSubmit after delay on user stop typing
+
   useEffect(() => {
     if (noteToEdit === undefined) {
       return;
@@ -111,6 +111,18 @@ const EditNoteModal = ({
       setNoteState({ title: noteToEdit?.title, body: noteToEdit?.body });
     }
   }, [noteToEdit]);
+
+  useEffect(() => {
+    console.log(noteState);
+    const handleSubmissionDebounce = setTimeout(() => {
+      console.log('debounce');
+      handleEditNoteSubmit(noteState);
+    }, 400);
+
+    return () => {
+      return clearTimeout(handleSubmissionDebounce);
+    };
+  }, [noteState, handleEditNoteSubmit]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -153,14 +165,11 @@ const EditNoteModal = ({
                   <br />
                   <div id='edit-date'>{shownDate}</div>
                 </ContentContainer>
-                <StyledToolbarContainer id='toolbar'>
-                  <StyledToolbar id='flex-toolbar'>
-                    <button>
-                      Delete Note
-                      <X size='24' className='toolbar-svg' />
-                    </button>
-                  </StyledToolbar>
-                  <button id='close-button'></button>
+                <StyledToolbarContainer>
+                  <StyledToolbar></StyledToolbar>
+                  <button id='close-button' onClick={toggleEditModal}>
+                    Close
+                  </button>
                 </StyledToolbarContainer>
               </StyledInfoAndContentContainer>
             </StyledModal>
