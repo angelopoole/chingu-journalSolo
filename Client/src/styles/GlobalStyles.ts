@@ -10,6 +10,8 @@ const GlobalStyles = createGlobalStyle`
     --dark-accent: #8D8D7E;
     --dark-shades: #3F393C;
 
+
+    
   }
 
 
@@ -23,12 +25,18 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body{
+
   margin: 0 auto;
-  height: 100%;
+  /* height: 100%; */
+  min-height: 100%;
+
+    
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 #root{
-height: 100%;
+  height: 100%;
 }
 
 .App{

@@ -62,16 +62,20 @@ const NavBar = () => {
               Chingu-Journal
             </StyledLink>
           </li>
-          <li className='nav-button'>Create a note</li>
           {auth.user ? (
-            <li className='align-left'>
-              <button
-                className='nav-button sign-out'
-                onClick={() => auth.signout()}
-              >
-                sign out
-              </button>
-            </li>
+            <>
+              <li className='nav-button'>
+                <StyledLink to='/homepage'>Create a note</StyledLink>
+              </li>
+              <li className='align-left'>
+                <button
+                  className='nav-button sign-out'
+                  onClick={() => auth.signout()}
+                >
+                  sign out
+                </button>
+              </li>
+            </>
           ) : (
             <>
               <li className='align-left'>

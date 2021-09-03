@@ -9,6 +9,7 @@ import Layout from './Layout';
 import AuthPage from '../pages/AuthPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import HomePage from '../pages/HomePage';
+import LandingPage from '../pages/LandingPage';
 
 // update meta tags
 
@@ -25,12 +26,13 @@ function App() {
             <Router>
               <Layout>
                 <Switch>
+                  <Route path='/' component={LandingPage} exact />
                   <Route
                     path='/auth/:formTypeParam'
                     component={AuthPage}
                     exact
                   />
-                  <Route path='/' component={HomePage} exact />
+                  <Route path='/homepage' component={HomePage} exact />
                   <Route path='*' component={NotFoundPage} />
                 </Switch>
               </Layout>
