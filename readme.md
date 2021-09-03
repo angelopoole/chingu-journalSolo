@@ -47,3 +47,5 @@ to run the application in dev mode, run
 ```bash
 npm run dev-server
 ```
+
+:)
