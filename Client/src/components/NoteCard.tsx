@@ -41,7 +41,7 @@ const StyledContentContainer = styled.div`
 `;
 
 const StyledContent = styled.div`
-  min-height: 60px;
+  min-height: 10em;
 `;
 
 const StyledTitle = styled.div`
@@ -59,12 +59,14 @@ const StyledBody = styled.div`
 const StyledflexButtons = styled.div`
   display: flex;
   flex-flow: row-reverse;
+  /* padding-bottom: 10em; */
 `;
 
 const StyledToolBar = styled.div`
   display: flex;
 
   button {
+    padding-bottom: 1em;
     border-radius: 50%;
   }
 
