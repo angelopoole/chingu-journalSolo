@@ -1,7 +1,7 @@
 {
   "name": "chingu-journal-solo",
   "proxy": "http://127.0.0.1:4000",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@styled-icons/feather": "^10.34.0",
