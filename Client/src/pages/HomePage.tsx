@@ -2,12 +2,12 @@ import React, { useEffect, useState, FormEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
+import { Redirect } from 'react-router-dom';
 
 import { useAuth } from '../hooks/use-auth';
 
 import NotesForm from '../components/sections/NotesForm';
 import NoteShowcase from '../components/sections/NoteShowcase';
-import Background from '../images/HomepageBackground.svg';
 
 import { Note } from '../interfaces/NoteTypes';
 import EditNoteModal from '../components/sections/EditNoteModal';
@@ -19,14 +19,11 @@ const StyledLoginContainer = styled.div`
 `;
 
 const StyledContainer = styled.div`
-  /* height: 100%; */
-
   .login-message {
+    display: block;
+    padding: 50%;
+    height: 100%;
     text-align: center;
-  }
-
-  .bg-svg {
-    background: url(${Background}) no-repeat;
   }
 `;
 
@@ -44,6 +41,10 @@ const HomePage = () => {
     }
   }, [auth.user]);
 
+  if (!auth?.user) {
+    return <Redirect to='/' />;
+  }
+
   const fetchPosts = async (userToken: string) => {
     const config = {
       headers: {
@@ -53,18 +54,6 @@ const HomePage = () => {
     const { data }: { data: [] } = await axios.get('/api/notes', config);
     return setUserNotes(data);
   };
-
-  if (!auth?.user) {
-    return (
-      <StyledLoginContainer id='terr'>
-        <StyledContainer>
-          <div className='bg-svg'>
-            <div className='login-message'> please login!</div>
-          </div>
-        </StyledContainer>
-      </StyledLoginContainer>
-    );
-  }
 
   const deleteNote = async (noteId: string) => {
     const config = {

@@ -127,7 +127,7 @@ const AuthPage = (props: RouteComponentProps) => {
   }
 
   if (auth.user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/homepage' />;
   }
 
   return (
