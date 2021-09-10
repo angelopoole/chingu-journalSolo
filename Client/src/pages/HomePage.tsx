@@ -38,36 +38,46 @@ const HomePage = () => {
   }, [auth.user]);
 
   const handleEditNoteSubmit = useCallback(
-    () => async (titleBody: { title: string; body: string }) => {
-      if (!noteToEdit) {
-        return;
-      }
-
-      const { _id, user } = noteToEdit;
-      const updatedNote = { _id, user, ...titleBody };
-
-      const filteredNote = userNotes.filter(note => {
-        if (note._id === updatedNote._id) {
-          note.body = updatedNote.body;
-          note.title = updatedNote.title;
+    titleBody => {
+      const handleEditNoteSubmitFn = async (titleBody: {
+        title: string;
+        body: string;
+      }) => {
+        if (!noteToEdit) {
+          return;
         }
-        return note;
-      });
 
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${auth.user?.token}`,
-          },
-        };
-        await axios.put(`/api/notes/${_id}`, titleBody, config);
-      } catch (error) {
-        console.error(error);
-      }
+        const { _id, user } = noteToEdit;
+        const updatedNote = { _id, user, ...titleBody };
 
-      setUserNotes(filteredNote);
+        // ! userNotes being in the callback causes re-calls as long as editNoteModal is open
+        // ! ommited from dep-array causes proper functionality
+        const filteredNote = userNotes.filter(note => {
+          if (note._id === updatedNote._id) {
+            note.body = updatedNote.body;
+            note.title = updatedNote.title;
+          }
+          return note;
+        });
+
+        try {
+          const config = {
+            headers: {
+              Authorization: `Bearer ${auth.user?.token}`,
+            },
+          };
+          await axios.put(`/api/notes/${_id}`, titleBody, config);
+        } catch (error) {
+          console.error(error);
+        }
+
+        setUserNotes(filteredNote);
+      };
+
+      handleEditNoteSubmitFn(titleBody);
     },
-    [auth.user?.token, noteToEdit, userNotes]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [auth.user?.token, noteToEdit]
   );
 
   if (!auth?.user) {

@@ -1,15 +1,8 @@
-import Express, { Request, Response } from 'express';
+import Express, { Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import Note from '../Models/notesModel';
 
 import { RequestWithUser } from '../interfaces/authInterface';
-// import
-
-// declare module "express-serve-static-core" {
-//   interface Request {
-//     userId?: string;
-//   }
-// }
 
 //  @desc creates a new note
 //  @route POST /api/notes/
